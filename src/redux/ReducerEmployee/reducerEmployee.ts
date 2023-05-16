@@ -10,13 +10,9 @@ const employeeSlice = createSlice({
   reducers: {
     addListValuesTable: (state, action) => {
       state.employeeListValueTable = action.payload;
-      console.log("state.employeeListValueTable", state.employeeListValueTable);
     },
     detailValueTable: (state, action) => {
-      console.log("action reducer employeeDetail ", action.payload);
-
       state.employeeDetail = action.payload;
-      console.log("state.employeeDetail", state.employeeDetail);
     },
   },
 });

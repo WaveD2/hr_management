@@ -18,7 +18,7 @@ const LoginPage: React.FC<LayoutProps> = ({ children }) => {
       }}>
       <section className="mb-9">
         <img src={logoBF} alt="" style={{ margin: "64px auto 0" }} />
-        <h2 className="font-medium text-4xl">HR Management System</h2>
+        <h2 className="font-medium text-5xl">HR Management System</h2>
       </section>
 
       <section>{children}</section>

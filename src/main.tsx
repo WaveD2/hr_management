@@ -13,7 +13,7 @@ import frFR from "antd/locale/fr_FR";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
-      <ConfigProvider locale={frFR}>
+      <ConfigProvider>
         <BrowserRouter>
           <App />
         </BrowserRouter>

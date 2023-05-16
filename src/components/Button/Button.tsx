@@ -6,18 +6,22 @@ import { IconType } from "antd/es/notification/interface";
 type Button = {
   textBtn: string;
   style: CSSProperties;
-  icon?: IconType;
+  icon?: string;
   htmlType?: string;
+  disabled?: boolean;
 };
 const ButtonComponent = (props: Button) => {
   return (
     <Button
+      disabled={props.disabled}
       type="primary"
       htmlType={props.htmlType}
-      className="flex items-center min-w-[90px] text-base justify-center"
+      className="flex items-center min-w-[90px] text-base justify-center py-2 px-3"
       style={props.style}>
-      <span>{props.icon}</span>
-      {props.textBtn}
+      <p className="flex items-center gap-3">
+        {props.icon && <span className="h-8 w-8 leading-8">{props.icon}</span>}
+        {props.textBtn}
+      </p>
     </Button>
   );
 };

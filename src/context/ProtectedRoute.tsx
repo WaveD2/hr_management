@@ -7,7 +7,6 @@ import { ACCESS_TOKEN_KEY } from "../constants/validate";
 const ProtectedRoute = (props: RouteProps) => {
   const { ...rest } = props;
   const auth = Cookies.get(ACCESS_TOKEN_KEY);
-  console.log("auth", auth);
 
   if (auth) {
     return <Route {...rest} />;

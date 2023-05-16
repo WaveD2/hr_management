@@ -1,4 +1,4 @@
-import { Breadcrumb, Layout } from "antd";
+import { Breadcrumb, Button, Layout } from "antd";
 import React, { ReactNode } from "react";
 import Footer from "../Home/Footer";
 import Navbar from "../Home/Navbar";
@@ -6,13 +6,15 @@ import Title from "../Title";
 import Search from "../Button/Search";
 import Header from "../Home/Header";
 import Content from "./Content";
-
+import ButtonComponent from "../Button/Button";
+import { useParams } from "react-router-dom";
 interface LayoutProps {
   children: ReactNode;
 }
 
 const LayoutHome: React.FC<LayoutProps> = ({ children }) => {
-  console.log("LayoutHome, ");
+  const params = useParams();
+  console.log("params", params);
 
   return (
     <Layout
@@ -61,6 +63,16 @@ const LayoutHome: React.FC<LayoutProps> = ({ children }) => {
             <div className="flex justify-between items-center pb-3  #">
               <Title title={"HR Management System"} />
               <Search />
+              {/* <ButtonComponent
+                textBtn="Save Change"
+                style={{
+                  backgroundColor: " rgb(0, 145, 255)",
+                  borderRadius: "6px",
+                  height: "48px",
+                  color: "#fff",
+                  textAlign: "center",
+                }}
+              /> */}
             </div>
 
             <Content children={children} />

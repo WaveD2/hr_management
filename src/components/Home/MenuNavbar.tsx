@@ -2,11 +2,16 @@ import { Menu } from "antd";
 
 import React from "react";
 
-const MenuNavbar = ({ menuNavBar }) => {
+type IMenuNavBar = {
+  title: string;
+  itemNavBar: [];
+};
+
+const MenuNavbar = ({ props }) => {
   const { Item } = Menu;
 
   return (
-    <Menu style={{ padding: "24px" }}>
+    <Menu style={{ padding: "24px" }} defaultOpenKeys={["3"]}>
       <h4
         style={{
           fontSize: "24px",
@@ -15,10 +20,11 @@ const MenuNavbar = ({ menuNavBar }) => {
           textTransform: "capitalize",
           fontWeight: "500",
         }}>
-        {menuNavBar.title}
+        {props.title}
       </h4>
-      {menuNavBar.itemNavBar.map((itemNavBar, index) => (
+      {props.itemNavBar?.map((itemNavBar, index) => (
         <Item
+          defaultChecked
           style={{
             display: "flex",
             alignItems: "center",

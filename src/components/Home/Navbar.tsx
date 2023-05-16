@@ -19,9 +19,9 @@ const Navbar = () => {
         boxShadow: "0px 5px 20px #F1F3F5",
       }}>
       <section style={{ borderBottom: "1px solid #fff" }}>
-        <MenuNavbar menuNavBar={general} />
+        <MenuNavbar props={general} />
       </section>
-      <MenuNavbar menuNavBar={advance} />
+      <MenuNavbar props={advance} />
     </Sider>
   );
 };

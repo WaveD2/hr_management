@@ -5,6 +5,7 @@ import Contract from "./EmployeeItemPage/Contract";
 import Others from "./EmployeeItemPage/Others";
 import Details from "./EmployeeItemPage/Details";
 import SalaryAndWages from "./EmployeeItemPage/SalaryAndWages";
+import ButtonComponent from "../../components/Button/Button";
 
 const ListTab = [
   { id: 1, title: "Employee Information", component: <Information /> },
@@ -21,7 +22,7 @@ const EmployeeInfoPage = () => {
     <Tabs defaultActiveKey="1" type="card">
       {ListTab.map((tab, index) => (
         <Tabs.TabPane className="flex flex-wrap" tab={tab.title} key={tab.id}>
-          <section>
+          <section className="w-full">
             <div className="flex items-center justify-between pb-2 border-b-2 border-indigo-500 ">
               <h4 className="flex-1 text-xl">{tab.title}</h4>
 

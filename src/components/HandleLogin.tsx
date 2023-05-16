@@ -33,11 +33,10 @@ const HandleLogin = () => {
         return response.data;
       })
       .then((res) => {
-        console.log("res", res);
         setValueSelect(res.data);
       })
       .catch((error: any) => {
-        console.error(error);
+        alert(error);
       });
   }, []);
 

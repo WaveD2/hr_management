@@ -8,10 +8,13 @@ import {
 } from "react-router-dom";
 import { ROUTES } from "../constants/routerConstants";
 import ProtectedRoute from "../context/ProtectedRoute";
+import ProtectedRouteLogin from "../context/ProtectedRouteLogin";
 
-const Layout = React.lazy(() => import("../components/Layout/Layout"));
-const LoginLayout = React.lazy(
-  () => import("../components/Layout/LayoutLogin")
+const RouterLayOut = React.lazy(
+  () => import("../components/Layout/RouterLayOut")
+);
+const RouterLogin = React.lazy(
+  () => import("../components/Layout/RouterLogin")
 );
 const ErrorPage = React.lazy(() => import("../pages/ErrorPage"));
 
@@ -22,10 +25,9 @@ export const Routers: React.FC = () => {
     <Router>
       <Suspense fallback={<div>Loading.....</div>}>
         <Switch location={location}>
-          {/* <Redirect from="/" to={ROUTES.login} exact /> */}
-          <Route path={ROUTES.auth} component={LoginLayout} />
-          <Route path={ROUTES.employee} component={Layout} />
-          {/* <ProtectedRoute path={ROUTES.employee} component={Layout} /> */}
+          <Redirect from="/" to={ROUTES.login} exact />
+          <ProtectedRoute path={ROUTES.employee} component={RouterLayOut} />
+          <ProtectedRouteLogin path={ROUTES.auth} component={RouterLogin} />
           <Route path="*" component={ErrorPage} />
         </Switch>
       </Suspense>

@@ -5,11 +5,11 @@ type ICallAPI = {
   method: string;
   data?: any;
   params: string;
+  key?: string;
+  page?: string;
 };
-
+// url: `https://api.hrm.div4.pgtest.co/api/v1/${props.params}?search=${props.key}&page=${props.page}`,
 async function callAPI(props: ICallAPI): Promise<AxiosResponse> {
-  console.log("props", props);
-
   // eslint-disable-next-line no-useless-catch
   try {
     const response = await axios({
@@ -21,7 +21,6 @@ async function callAPI(props: ICallAPI): Promise<AxiosResponse> {
         cache: "no-store",
       },
     });
-    console.log("response api", response);
 
     return response;
   } catch (error) {
