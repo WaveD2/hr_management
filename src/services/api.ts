@@ -1,29 +1,25 @@
-import { APIHost, APIUrl } from "../utils/constants";
+import { APIUrl } from "../constants/validate";
 
 enum APIService {
   auth,
-  protected,
+  employee,
   public,
 }
 
 function getBaseUrl(service: APIService) {
-  console.log("service connect", service);
-  console.log(APIService);
-
   if (service === APIService.auth) {
-    console.log(APIHost);
-
-    return `${APIUrl}/api/auth`;
-  } else if (service === APIService.protected) {
-    return `${APIHost}/protected`;
+    return `${APIUrl}login`;
+  } else if (service === APIService.employee) {
+    return `${APIUrl}employee`;
   } else if (service === APIService.public) {
-    return `${APIHost}`;
+    return `${APIUrl}`;
   }
 
   return "";
 }
 
 export const API_PATHS = {
-  signIn: `${getBaseUrl(APIService.auth)}/login`,
-  userProfile: `${getBaseUrl(APIService.public)}/user`,
+  signIn: `${getBaseUrl(APIService.auth)}`,
+  detailEmployee: `${getBaseUrl(APIService.employee)}`,
+  defaultAPI: `${getBaseUrl(APIService.public)}`,
 };

@@ -1,0 +1,18 @@
+{
+  "home lang": {
+    "login": "Login",
+    "forgot pass": "Forgot password",
+    "reset pass": "Reset password",
+    "back sign in": "Back to Sign In",
+    "email": "Your work email",
+    "confirm": "Confirm & Sent OTP",
+    "management system": "Management System",
+    "required ": "Required ",
+    "username": "User Name",
+    "password": "Password",
+    "factory": "Factory",
+    "save change": "Save Change",
+    "add": "Add",
+    "delete": "Delete"
+  }
+}

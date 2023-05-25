@@ -1,0 +1,18 @@
+{
+  "home lang": {
+    "login": "Đăng Nhập",
+    "forgot pass": "Quên mật khẩu",
+    "reset pass": "Cài đặt mật khẩu",
+    "back sign in": "Trở về đăng nhập",
+    "email": "Email",
+    "confirm": "Gửi OTP",
+    "management system": "Quản lý nhân sự",
+    "required": "Thông tin bắt buộc",
+    "username": "Tên đăng nhập",
+    "password": "Mật khẩu",
+    "factory": "Khu vực",
+    "save change": "Lưu lại",
+    "add": "Thêm",
+    "delete": "Xóa"
+  }
+}

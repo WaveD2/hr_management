@@ -1,42 +1,61 @@
-import React, { useEffect, Event, useCallback } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useEffect, Event, useCallback, useState } from "react";
 import { Input } from "antd";
 import Cookies from "js-cookie";
 import { ACCESS_TOKEN_KEY } from "../../constants/validate";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { useDispatch } from "react-redux";
 import { employeeAction } from "../../redux/ReducerEmployee/reducerEmployee";
+import callAPI from "../../services/fetchApi";
+import { API_PATHS } from "../../services/api";
+import { useNavigate } from "react-router";
+import { useSearchParams, useParams } from "react-router-dom";
 
-const Search: React.FC = () => {
+interface IPage {
+  page: string;
+}
+
+const Search = ({ page }: IPage) => {
+  const navigate = useNavigate();
+
+  const [pages, setPage] = useSearchParams("1");
+
+  useEffect(() => {
+    setPage(page);
+  }, [page]);
+
   const { Search } = Input;
   const dispatch = useDispatch();
+  const handleChangeSearch = React.useCallback(async (e: Event) => {
+    const keySearch = e.target.value;
+    console.log("pages", pages);
 
-  const onSearch = async (e: Event) => {
-    console.log("e.target.defaultValue", e.target.defaultValue);
-
-    const response = await axios({
+    navigate(`?search=${keySearch}&page=${pages}`);
+    callAPI({
+      baseUrl: API_PATHS.detailEmployee,
       method: "GET",
-      url: `https://api.hrm.div4.pgtest.co/api/v1/employee?search=${e.target.defaultValue}&page=1`,
-      headers: {
-        authorization: `Bearer  ${Cookies.get(ACCESS_TOKEN_KEY)}` || "",
-        cache: "no-store",
+      isUrlParams: true,
+      key: {
+        search: keySearch,
+        page: pages,
       },
-    });
-    if (response.status === 200 && response.data.message === "Success") {
-      const dataResult = response?.data.data.data;
-      dispatch(employeeAction.addListValuesTable(dataResult));
-    } else {
-      alert("Error");
-    }
-  };
-  useCallback(() => {
-    onSearch();
+    })
+      .then((response: AxiosResponse) => {
+        const dataResult = response?.data.data;
+        console.log("dataResult", response);
+
+        dispatch(employeeAction.addListValuesTable(dataResult));
+      })
+      .catch((error: any) => {
+        console.error(error);
+      });
   }, []);
 
   return (
     <Search
       placeholder="Search..."
       style={{ width: 200 }}
-      onChange={onSearch}
+      onChange={handleChangeSearch}
     />
   );
 };

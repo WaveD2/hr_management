@@ -1,24 +1,69 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import InputComponent from "../../../components/Inputs/Input";
 import InputDate from "../../../components/Inputs/InputDate";
 import UpLoadFile from "../../../components/Button/UpLoadFile";
 import ButtonComponent from "../../../components/Button/Button";
 import TableComponent from "../../../components/Table/Table";
+import { useSelector } from "react-redux";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+import { Form } from "antd";
+import { useDispatch } from "react-redux";
+import { employeeAction } from "../../../redux/ReducerEmployee/reducerEmployee";
+
+dayjs.extend(customParseFormat);
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const Contract = () => {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  // const [isShowUploadLists, setIsShowUploadList] = useState(true);
+  const [name, setName] = useState("");
+
+  const dispatch = useDispatch();
+  const detailTable = useSelector(
+    (state: any) => state?.employee.employeeDetail
+  );
+
+  const { contract_start_date } = detailTable;
+
+  const handleOnFinish = (value) => {
+    const dateString = value.contractDate.$d;
+    const dateObject = new Date(dateString);
+    const formattedDate = dayjs(dateObject).format("YYYY/MM/DD");
+
+    const nameString = value.contractName;
+
+    dispatch(
+      employeeAction.addEmployeeImage({
+        id: Math.random(),
+        name: nameString,
+        date: formattedDate,
+        document: selectedFile,
+      })
+    );
+  };
+
+  const handleImageUpload = (binaryData: File) => {
+    setSelectedFile(binaryData);
+  };
+
   return (
     <section>
       <InputDate
-        defaultValue={"2019-01-25"}
+        defaultValue={contract_start_date}
         textInputDate="Date Start"
         typeInputDate="datePicker"
+        nameInputDate="date-start"
       />
       <InputComponent
-        textInput="InputComponent"
+        textInput="Employee Type"
         isDisabled={true}
-        defaultValue="Contract"
-        valueInput="Contract"
-        rules={[{}]}
+        defaultValue="Part-time"
+        valueInput="Part-time"
+        name="employee-type"
       />
       <div
         className="flex flex-col rounded-md"
@@ -32,27 +77,38 @@ const Contract = () => {
           Please upload pdf, png, xlsx, docx file format!
         </p>
         <hr />
-        <div
-          className="flex flex-wrap gap-5  "
-          style={{ padding: "20px 14px 30px 20px" }}>
-          <form className="flex flex-col max-w-[400px] gap-2 flex-1">
-            <InputDate textInputDate="Date Start" typeInputDate="datePicker" />
-            <InputComponent
-              textInput="InputComponent"
-              isDisabled={true}
-              defaultValue="Contract"
-              valueInput="Contract"
-              rules={[{}]}
+        <div className="gap-5 " style={{ padding: "20px 14px 30px 20px" }}>
+          <Form
+            className="flex flex-col max-w-[400px] gap-2 flex-1 mb-4"
+            onFinish={handleOnFinish}>
+            <InputDate
+              textInputDate="Contract Date"
+              typeInputDate="datePicker"
+              nameInputDate="contractDate"
             />
-            <div className="flex gap-2 items-center">
-              <UpLoadFile />
-              <ButtonComponent text="Add" size="middle" />
+            <InputComponent
+              textInput="Contract Name"
+              isRules={true}
+              name="contractName"
+              valueInput={name}
+            />
+            <div className=" flex gap-4">
+              <UpLoadFile
+                isMultiple={false}
+                onImageUpload={handleImageUpload}
+                isShowUploadList={false}
+              />
+              <ButtonComponent
+                htmlType="submit"
+                textBtn="Add"
+                style={{ color: "#Fff", background: "#ccc" }}
+              />
             </div>
-          </form>
+          </Form>
           <hr />
-          <div className="flex-1 w-full">
+          <section className="mt-4 ">
             <TableComponent />
-          </div>
+          </section>
         </div>
       </div>
     </section>

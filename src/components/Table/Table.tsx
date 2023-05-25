@@ -1,99 +1,85 @@
-import React from "react";
-import { Table } from "antd";
+import React, { useEffect, useState } from "react";
+import { Table, Tag } from "antd";
 import type { ColumnsType } from "antd/es/table";
-
+import { useSelector, useDispatch } from "react-redux";
+import { DeleteOutlined } from "@ant-design/icons";
+import { employeeAction } from "../../redux/ReducerEmployee/reducerEmployee";
 interface DataType {
   key: React.Key;
-  name: string;
-  age: number;
-  address: string;
+  No: number;
+  Name: string;
+  time: string;
+  action: string;
 }
 
 const columns: ColumnsType<DataType> = [
   {
-    title: "Full Name",
+    title: "No",
     width: 100,
+    dataIndex: "no",
+    key: "no",
+  },
+  {
+    title: "Document Name",
+    width: 200,
     dataIndex: "name",
     key: "name",
-    fixed: "left",
   },
   {
-    title: "Age",
-    width: 100,
-    dataIndex: "age",
-    key: "age",
-    fixed: "left",
+    title: "Create At",
+    width: 200,
+    dataIndex: "date",
+    key: "date",
   },
-  {
-    title: "Column 1",
-    dataIndex: "address",
-    key: "1",
-    width: 150,
-  },
-  {
-    title: "Column 2",
-    dataIndex: "address",
-    key: "2",
-    width: 150,
-  },
-  {
-    title: "Column 3",
-    dataIndex: "address",
-    key: "3",
-    width: 150,
-  },
-  {
-    title: "Column 4",
-    dataIndex: "address",
-    key: "4",
-    width: 150,
-  },
-  {
-    title: "Column 5",
-    dataIndex: "address",
-    key: "5",
-    width: 150,
-  },
-  {
-    title: "Column 6",
-    dataIndex: "address",
-    key: "6",
-    width: 150,
-  },
-  {
-    title: "Column 7",
-    dataIndex: "address",
-    key: "7",
-    width: 150,
-  },
-  { title: "Column 8", dataIndex: "address", key: "8" },
   {
     title: "Action",
-    key: "operation",
-    fixed: "right",
     width: 100,
-    render: () => <a>action</a>,
+    dataIndex: "action",
+    key: "action",
   },
 ];
 
-const data: DataType[] = [];
-for (let i = 0; i < 100; i++) {
-  data.push({
-    key: i,
-    name: `Edward ${i}`,
-    age: 32,
-    address: `London Park no. ${i}`,
-  });
-}
+const TableComponent = () => {
+  const dispatch = useDispatch();
+  const select = useSelector((state: any) => state.employee.employeeImage);
+  const [source, setSource] = useState();
 
-const TableComponent: React.FC = () => (
-  <Table
-    columns={columns}
-    pagination={false}
-    dataSource={data}
-    scroll={{ x: 1500, y: 300 }}
-    style={{ overflow: "hidden" }}
-  />
-);
+  const handleDelete = (id) => {
+    dispatch(employeeAction.deleteEmployeeImage(id));
+  };
+  useEffect(() => {
+    const newSource = select?.map((item, index) => ({
+      ...item,
+      no: index + 1,
+      action: (
+        <Tag
+          color="magenta"
+          className="w-[80px] flex gap-2 items-center cursor-pointer"
+          onClick={() => {
+            handleDelete(item.id);
+          }}>
+          <DeleteOutlined />
+          Delete
+        </Tag>
+      ),
+    }));
+    console.log("newSource", newSource);
+
+    setSource(newSource);
+  }, [select]);
+
+  return (
+    <Table
+      style={{
+        maxHeight: "225px",
+        minHeight: "225px",
+      }}
+      className="w-full flex-1 border-2 rounded-xl border-[#e2e1e1df]"
+      columns={columns}
+      dataSource={source}
+      pagination={false}
+    />
+  );
+};
 
 export default TableComponent;

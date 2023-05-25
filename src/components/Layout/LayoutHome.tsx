@@ -1,20 +1,38 @@
 import { Breadcrumb, Button, Layout } from "antd";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 import Footer from "../Home/Footer";
 import Navbar from "../Home/Navbar";
-import Title from "../Title";
 import Search from "../Button/Search";
 import Header from "../Home/Header";
 import Content from "./Content";
 import ButtonComponent from "../Button/Button";
-import { useParams } from "react-router-dom";
-interface LayoutProps {
-  children: ReactNode;
-}
+import { useParams, Outlet, useLocation, Link } from "react-router-dom";
+import TitleComponents from "../TitleComponents";
+import { useSelector } from "react-redux";
 
-const LayoutHome: React.FC<LayoutProps> = ({ children }) => {
-  const params = useParams();
-  console.log("params", params);
+const LayoutHome = () => {
+  const location = useLocation();
+  const { pathname } = location;
+  const pathnames = pathname.split("/").filter((item) => item);
+
+  const deletePathNameFinal = pathnames.pop(); // element path delete
+
+  function getTitle(href: string): string {
+    if (href === "employee") {
+      return "Employee Management";
+    } else if (href === "create-or-update") {
+      return "Edit employee";
+    } else {
+      return "";
+    }
+  }
+  const listPathNames = pathnames.map((item) => {
+    const newObj = {
+      href: item,
+      title: getTitle(item),
+    };
+    return newObj;
+  });
 
   return (
     <Layout
@@ -55,27 +73,28 @@ const LayoutHome: React.FC<LayoutProps> = ({ children }) => {
               maxWidth: "1170px",
               flex: "1 1 0%",
             }}>
-            <Breadcrumb style={{ margin: "16px 0" }}>
-              <Breadcrumb.Item>General</Breadcrumb.Item>
-              <Breadcrumb.Item>Employee Management</Breadcrumb.Item>
+            <Breadcrumb separator=">">
+              {listPathNames.length > 0 ? (
+                <Breadcrumb.Item>General</Breadcrumb.Item>
+              ) : (
+                <>
+                  <Breadcrumb.Item>General</Breadcrumb.Item>
+                  <Breadcrumb.Item>Employee Management</Breadcrumb.Item>
+                </>
+              )}
+              {listPathNames?.map((item, index) => {
+                const isLast = index === listPathNames.length;
+                return isLast ? (
+                  <Breadcrumb.Item>{item.title}</Breadcrumb.Item>
+                ) : (
+                  <Breadcrumb.Item className="text-[#e92c2c]">
+                    <Link to={`${item.href}`}>{item.title}</Link>
+                  </Breadcrumb.Item>
+                );
+              })}
             </Breadcrumb>
 
-            <div className="flex justify-between items-center pb-3  #">
-              <Title title={"HR Management System"} />
-              <Search />
-              {/* <ButtonComponent
-                textBtn="Save Change"
-                style={{
-                  backgroundColor: " rgb(0, 145, 255)",
-                  borderRadius: "6px",
-                  height: "48px",
-                  color: "#fff",
-                  textAlign: "center",
-                }}
-              /> */}
-            </div>
-
-            <Content children={children} />
+            <Outlet />
           </div>
 
           <Footer />

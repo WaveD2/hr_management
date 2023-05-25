@@ -1,13 +1,18 @@
 import React from "react";
 import HandleLogin from "../../../components/HandleLogin";
 import Help from "../../../components/Help";
+import TitleComponents from "../../../components/TitleComponents";
+import { useTranslation } from "react-i18next";
+
 const Login = () => {
+  const { t } = useTranslation(["home"]);
+
   return (
     <section>
-      <h3 className="text-4xl mb-5 font-medium text-center">Sign In</h3>
+      <TitleComponents title={t("home lang.login")} />
       <div className="formLogin">
         <HandleLogin />
-        <Help text="Forgot Your Password?" href="forgot-password" />
+        <Help text={t("home lang.forgot pass")} href="auth/forgot-password" />
       </div>
     </section>
   );

@@ -1,26 +1,60 @@
+import logoBF from "../../assets/img/logoBF.png";
 import React, { useState, useEffect } from "react";
 import { Layout, Select, Avatar, Space, Modal, Tag, Button } from "antd";
-import logoBF from "../../assets/img/logoBF.png";
-import Title from "../Title";
 import { UserOutlined } from "@ant-design/icons";
 import callAPI from "../../services/fetchApi";
+import { useDispatch } from "react-redux";
+import { API_PATHS } from "../../services/api";
+import { useTranslation } from "react-i18next";
+import { locales } from "../../i18n/i18n";
+import TitleComponents from "../TitleComponents";
+import { statusAction } from "../../redux/ReducerStatus/reducerStatus";
+import ModalComponent from "../Modal";
+import "./style.css";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router";
 
 const Header = () => {
   const { Header } = Layout;
+  const { i18n, t } = useTranslation(["home"]);
+  const currentLang = locales[i18n.language];
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalChildren, setIsModalChildren] = useState(false);
   const [detailUser, setDetailUser] = useState<any>();
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleChange = (value: string) => {
+    localStorage.setItem("lang", value);
+    i18n.changeLanguage(value);
+  };
+
+  const handleLogout = () => {
+    callAPI({
+      baseUrl: API_PATHS.defaultAPI,
+      isUrlParams: false,
+      method: "POST",
+      params: "logout",
+    });
+    dispatch(statusAction.isModal(false));
+    Cookies.remove("ACCESS_TOKEN_KEY");
+    navigate("/auth/login");
+  };
+
   useEffect(() => {
     callAPI({
+      baseUrl: API_PATHS.defaultAPI,
+      isUrlParams: false,
       method: "GET",
       params: "user/detail",
     })
       .then((res) => setDetailUser(res.data.data))
       .catch((error) => console.log(error));
   }, []);
-
-  const handleChange = (value: { value: string; label: React.ReactNode }) => {
-    console.log(value); // { value: "lucy", key: "lucy", label: "Lucy (101)" }
-  };
 
   return (
     <section className="w-full relative h-16 ">
@@ -36,25 +70,20 @@ const Header = () => {
             alt="logo"
             style={{ height: "46px", width: "46px", objectFit: "cover" }}
           />
-          <Title title={"HR Management System"} />
+          <TitleComponents title={`HR ${t("home lang.management system")}`} />
         </div>
 
-        <div className="flex items-center gap-4 relative">
+        <div className="flex items-center gap-4 relative ">
           <Select
-            labelInValue
-            defaultValue={{ value: "lucy", label: "Lucy (101)" }}
+            className="w-[150px] overflow-hidden "
+            defaultValue={currentLang}
             onChange={handleChange}
             options={[
-              {
-                value: "jack",
-                label: "Jack (100)",
-              },
-              {
-                value: "lucy",
-                label: "Lucy (101)",
-              },
+              { value: "en", label: "English" },
+              { value: "vi", label: "Tiếng Việt" },
             ]}
           />
+
           <Space wrap size={16}>
             <Avatar
               icon={<UserOutlined />}
@@ -62,51 +91,60 @@ const Header = () => {
               style={{ cursor: "pointer" }}
             />
           </Space>
-          {isModalOpen && (
-            <section className="absolute top-16 right-0 bg-[#e4e2e2] rounded-xl">
-              <div className="py-5 px-6 mt-2 w-[322px]">
-                <div>
-                  <div className="flex items-center gap-4">
-                    <img
-                      src="https://i.pinimg.com/236x/3f/5f/9c/3f5f9c42033509e36bcc4ce3d8f2ed51.jpg"
-                      alt="avatar"
-                      style={{
-                        width: "35px",
-                        height: "35px",
-                        objectFit: "cover",
-                        borderRadius: "100%",
-                      }}
-                    />
-                    <h3 className="text-2xl font-normal ">
-                      {detailUser.employee.name}
-                    </h3>
-                  </div>
-
-                  <Tag color="purple">{detailUser.position_name}</Tag>
+          <Modal
+            open={isModalOpen}
+            onCancel={handleCancel}
+            className="modal-header absolute top-16 right-11 bg-[#e4e2e2] rounded-xl">
+            <div className="mt-2  h-full">
+              <div>
+                <div className="flex items-center gap-4 mb-4">
+                  <img
+                    src="https://i.pinimg.com/236x/3f/5f/9c/3f5f9c42033509e36bcc4ce3d8f2ed51.jpg"
+                    alt="avatar"
+                    style={{
+                      width: "35px",
+                      height: "35px",
+                      objectFit: "cover",
+                      borderRadius: "100%",
+                    }}
+                  />
+                  <h3 className="text-2xl font-normal ">
+                    {detailUser?.employee.name}
+                  </h3>
                 </div>
 
-                <div className="py-2 text-base font-normal">
-                  <p className="mb-2">{detailUser.department_name}</p>
-                  <p>Staff ID: {detailUser.employee.staff_id}</p>
-                </div>
-
-                <Button
-                  block
-                  style={{
-                    padding: "8px 22px",
-                    height: "48px",
-                    color: "rgb(251, 253, 255)",
-                    backgroundColor: " rgb(0, 145, 255)",
-                  }}>
-                  Sign Out
-                </Button>
-
-                <a href="#">Reset password</a>
+                <Tag color="purple">{detailUser?.position_name}</Tag>
               </div>
-            </section>
-          )}
+
+              <div className="py-2 text-base font-normal mt-4">
+                <p className="mb-2">{detailUser?.department_name}</p>
+                <p>Staff ID: {detailUser?.employee.staff_id}</p>
+              </div>
+
+              <Button
+                block
+                onClick={() => dispatch(statusAction.isModal(true))}
+                style={{
+                  margin: "10px 0",
+                  padding: "8px 22px",
+                  height: "48px",
+                  color: "rgb(251, 253, 255)",
+                  backgroundColor: " rgb(0, 145, 255)",
+                }}>
+                Sign Out
+              </Button>
+
+              <a href="#">
+                <span className="text-[#1c91eb]"> Reset password</span>
+              </a>
+            </div>
+          </Modal>
         </div>
       </Header>
+      <ModalComponent
+        title="Do you wish to sign out?"
+        handleOk={handleLogout}
+      />
     </section>
   );
 };

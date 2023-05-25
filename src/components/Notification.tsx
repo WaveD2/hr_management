@@ -15,7 +15,7 @@ const Notification = (props: IProps) => {
   notification.config({
     placement: "topRight",
     top: 50,
-    duration: 2,
+    duration: 1,
     rtl: true,
   });
   return notification.success({

@@ -1,0 +1,9 @@
+{
+  "employee": {
+    "info": "Employee Information",
+    "contract": "Contract Information",
+    "detail": "Details Information",
+    "salary_wages": "Salary Wages",
+    "others": "Others"
+  }
+}

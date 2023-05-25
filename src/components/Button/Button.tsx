@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, MouseEventHandler, ReactNode } from "react";
 import { Button } from "antd";
 import { SizeType } from "antd/es/config-provider/SizeContext";
 import { FileAddOutlined, DeleteOutlined } from "@ant-design/icons";
@@ -6,13 +6,15 @@ import { IconType } from "antd/es/notification/interface";
 type Button = {
   textBtn: string;
   style: CSSProperties;
-  icon?: string;
-  htmlType?: string;
+  icon?: ReactNode;
+  htmlType?: string | any;
   disabled?: boolean;
+  handleCLick?: MouseEventHandler<HTMLAnchorElement> | any;
 };
 const ButtonComponent = (props: Button) => {
   return (
     <Button
+      onClick={props.handleCLick}
       disabled={props.disabled}
       type="primary"
       htmlType={props.htmlType}

@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 type IHelp = {
   text: string;
@@ -8,10 +8,10 @@ type IHelp = {
 };
 
 const Help = (prop: IHelp) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const handleHelp = (e) => {
     e.preventDefault();
-    history.push(`${prop.href}`);
+    navigate(`/${prop.href}`);
   };
   return (
     <div className="help mt-2 mb-4">

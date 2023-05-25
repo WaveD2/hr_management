@@ -1,13 +1,13 @@
+import logoBF from "../../assets/img/logoBF.png";
 import React, { ReactNode } from "react";
 import Footer from "../../components/Home/Footer";
 import "../style.css";
-import logoBF from "../../assets/img/logoBF.png";
+import { useTranslation } from "react-i18next";
+import { Outlet } from "react-router-dom";
+import TitleComponents from "../../components/TitleComponents";
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-const LoginPage: React.FC<LayoutProps> = ({ children }) => {
+const LoginPage = () => {
+  const { t } = useTranslation();
   return (
     <div
       className="flexColCenter m-auto "
@@ -18,10 +18,10 @@ const LoginPage: React.FC<LayoutProps> = ({ children }) => {
       }}>
       <section className="mb-9">
         <img src={logoBF} alt="" style={{ margin: "64px auto 0" }} />
-        <h2 className="font-medium text-5xl">HR Management System</h2>
+        <TitleComponents title={`HR ${t("home lang.management system")}`} />
       </section>
 
-      <section>{children}</section>
+      <Outlet />
 
       <Footer />
     </div>

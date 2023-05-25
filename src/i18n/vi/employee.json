@@ -1,0 +1,9 @@
+{
+  "employee": {
+    "info": "Thông tin",
+    "contract": "Hợp đồng",
+    "detail": "Thông tin chi tiết",
+    "salary_wages": "Tiền lương",
+    "others": "Người khác"
+  }
+}

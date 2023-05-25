@@ -1,10 +1,15 @@
 import React from "react";
-import { Route, RouteProps } from "react-router-dom";
+import { Outlet, Route, RouteProps, Routes } from "react-router-dom";
 
-const ProtectedRouteLogin = (props: RouteProps) => {
-  const { ...rest } = props;
+const ProtectedRouteLogin = (props: JSX.Element) => {
+  // const { ...rest } = props;
+  console.log("123");
 
-  return <Route {...rest} />;
+  return (
+    <Routes>
+      <Route {...props} />
+    </Routes>
+  );
 };
 
 export default ProtectedRouteLogin;

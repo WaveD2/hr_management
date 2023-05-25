@@ -14,6 +14,8 @@ interface ISelect {
   onChangeText?: string;
   onFocus?: string;
   onBlur?: string;
+  name?: string;
+  indexSelect?: number | any;
 }
 
 const InputSelect = (props: ISelect) => {
@@ -23,7 +25,7 @@ const InputSelect = (props: ISelect) => {
   return (
     <Form.Item
       initialValue={props.defaultValue}
-      name={props.textSelect.toLowerCase()}
+      name={props.name}
       label={props.textSelect}
       rules={[
         {
@@ -38,11 +40,11 @@ const InputSelect = (props: ISelect) => {
           background: "#F1F3F5",
           borderRadius: "6px",
         }}
-        defaultValue={props.valueSelect[0]}>
-        {props.valueSelect.map((text, index) => (
-          <Select.Option value={text?.name} key={index}>
-            {text?.name?.toString()}
-          </Select.Option>
+        defaultValue={
+          props?.defaultValue || props?.valueSelect[props?.indexSelect]
+        }>
+        {props.valueSelect?.map((item, index) => (
+          <Select.Option key={index}>{item?.name || item}</Select.Option>
         ))}
       </Select>
     </Form.Item>

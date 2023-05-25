@@ -3,29 +3,32 @@ import Cookies from "js-cookie";
 import { ACCESS_TOKEN_KEY } from "../constants/validate";
 type ICallAPI = {
   method: string;
-  data?: any;
-  params: string;
-  key?: string;
+  data?: Object;
+  params?: string;
+  key?: object;
   page?: string;
+  baseUrl: string;
+  isUrlParams: boolean;
 };
 // url: `https://api.hrm.div4.pgtest.co/api/v1/${props.params}?search=${props.key}&page=${props.page}`,
-async function callAPI(props: ICallAPI): Promise<AxiosResponse> {
-  // eslint-disable-next-line no-useless-catch
+async function callAPI(props: ICallAPI) {
+  const { baseUrl, method, data, params, key, isUrlParams } = props;
+  const url = isUrlParams ? baseUrl : `${baseUrl}${params}`;
   try {
     const response = await axios({
-      method: props.method,
-      url: `https://api.hrm.div4.pgtest.co/api/v1/${props.params}`,
-      data: props?.data,
+      url,
+      method,
+      data,
+      params: { ...key },
       headers: {
         authorization: `Bearer  ${Cookies.get(ACCESS_TOKEN_KEY)}` || "",
         cache: "no-store",
       },
     });
-
     return response;
   } catch (error) {
-    // Xử lý lỗi tại đây
-    throw error;
+    console.error(error);
+    return error;
   }
 }
 

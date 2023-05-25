@@ -9,6 +9,7 @@ interface IInput {
   isRules?: boolean;
   style?: string;
   valueInput?: string;
+  name?: string;
   // onChangeText?: string;
   onFocus?: string;
   onBlur?: string;
@@ -17,7 +18,8 @@ interface IInput {
 const InputComponent = (props: IInput) => {
   return (
     <Form.Item
-      name={props.textInput.toLowerCase()}
+      
+      name={props.name}
       label={props.textInput}
       rules={[
         {
@@ -26,11 +28,11 @@ const InputComponent = (props: IInput) => {
         },
       ]}>
       <Input
+       
         disabled={props.isDisabled}
         defaultValue={props.defaultValue}
         value={props.valueInput}
         style={{ padding: "12px" }}
-        onChange={() => console.log(props.valueInput)}
       />
     </Form.Item>
   );
