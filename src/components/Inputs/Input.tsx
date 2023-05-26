@@ -18,7 +18,6 @@ interface IInput {
 const InputComponent = (props: IInput) => {
   return (
     <Form.Item
-      
       name={props.name}
       label={props.textInput}
       rules={[
@@ -28,7 +27,6 @@ const InputComponent = (props: IInput) => {
         },
       ]}>
       <Input
-       
         disabled={props.isDisabled}
         defaultValue={props.defaultValue}
         value={props.valueInput}

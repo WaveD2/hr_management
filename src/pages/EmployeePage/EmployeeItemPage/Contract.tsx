@@ -37,7 +37,7 @@ const Contract = () => {
     const nameString = value.contractName;
 
     dispatch(
-      employeeAction.addEmployeeImage({
+      employeeAction.addEmployeeContractImage({
         id: Math.random(),
         name: nameString,
         date: formattedDate,

@@ -7,13 +7,16 @@ import { useSelector } from "react-redux";
 import callAPI from "../../../services/fetchApi";
 import { AxiosResponse } from "axios";
 import { API_PATHS } from "../../../services/api";
-
+import { useParams } from "react-router";
 const Information = () => {
+  // const [dataTable, setDataTable] = useState<any>();
+  // const { id } = useParams();
+  // if (id) {
+
+  //   setDataTable(resDetail);
+  // }
+  const resDetail = useSelector((state: any) => state?.employee.employeeDetail);
   const [marriage, setMarriage] = useState();
-  const detailTable = useSelector(
-    (state: any) => state?.employee.employeeDetail
-  );
-  // console.log("detailTable", detailTable);
 
   useEffect(() => {
     callAPI({
@@ -49,79 +52,74 @@ const Information = () => {
     family_card_number,
     bank_name,
     mobile_no,
-  } = detailTable;
+  } = resDetail;
 
   const genders = ["Male", "Female"];
   return (
-    <section>
-      <Form className="flex flex-wrap pb-5 gap-2">
-        <InputComponent
-          defaultValue={staff_id}
-          textInput={"NIK"}
-          isDisabled={true}
-        />
-        <InputSelect
-          valueSelect={genders}
-          indexSelect={gender}
-          textSelect={"Gender"}
-          isRules={true}
-        />
-        <InputComponent
-          textInput={"Name"}
-          isRules={true}
-          defaultValue={nameUser}
-        />
-        <InputComponent textInput={"Mother Name"} defaultValue={mother_name} />
-        <InputDate
-          textInputDate="Date of birth"
-          typeInputDate="datePicker"
-          defaultValue={dob}
-        />
-        <InputComponent
-          textInput={"Place of birth"}
-          defaultValue={contract_start_date}
-        />
+    <Form className="grid grid-cols-2 pb-5">
+      <InputComponent
+        defaultValue={staff_id}
+        textInput={"NIK"}
+        isDisabled={true}
+      />
+      <InputSelect
+        valueSelect={genders}
+        indexSelect={gender}
+        textSelect={"Gender"}
+        isRules={true}
+      />
+      <InputComponent
+        textInput={"Name"}
+        isRules={true}
+        defaultValue={nameUser}
+      />
+      <InputComponent textInput={"Mother Name"} defaultValue={mother_name} />
+      <InputDate
+        textInputDate="Date of birth"
+        typeInputDate="datePicker"
+        defaultValue={dob}
+      />
+      <InputComponent
+        textInput={"Place of birth"}
+        defaultValue={contract_start_date}
+      />
 
-        <InputComponent textInput={"Mobile No."} defaultValue={mobile_no} />
-        <InputComponent textInput={"Tel No."} defaultValue={tel_no} />
-        <InputSelect
-          valueSelect={marriage}
-          textSelect={"Marriage Status"}
-          defaultValue="Choose Marriage Status "
-        />
-        <InputComponent textInput={"KTP No.*"} defaultValue={ktp_no} />
-        <InputComponent textInput={"National Card ID"} defaultValue={nc_id} />
-        <InputComponent
-          textInput={"Home Address 1"}
-          defaultValue={home_address_1}
-        />
-        <InputComponent
-          textInput={"Home Address 2"}
-          defaultValue={home_address_2}
-        />
-        <InputComponent
-          textInput={"Bank Card No."}
-          defaultValue={card_number}
-        />
-        <InputComponent
-          textInput={"Bank Account No."}
-          defaultValue={bank_account_no}
-        />
-        <InputComponent textInput={"Bank Name"} defaultValue={bank_name} />
-        <InputComponent
-          textInput={"Family Card Number"}
-          defaultValue={family_card_number}
-        />
-        <InputComponent
-          textInput={"Safety Insurance No."}
-          defaultValue={safety_insurance_no}
-        />
-        <InputComponent
-          textInput={"Health Insurance No."}
-          defaultValue={health_insurance_no}
-        />
-      </Form>
-    </section>
+      <InputComponent textInput={"Mobile No."} defaultValue={mobile_no} />
+      <InputComponent textInput={"Tel No."} defaultValue={tel_no} />
+      <InputSelect
+        valueSelect={marriage}
+        textSelect={"Marriage Status"}
+        defaultValue="Choose Marriage Status "
+      />
+      <InputComponent textInput={"KTP No.*"} defaultValue={ktp_no} />
+      <InputComponent textInput={"National Card ID"} defaultValue={nc_id} />
+      <InputComponent
+        textInput={"Home Address 1"}
+        defaultValue={home_address_1}
+      />
+      <InputComponent
+        textInput={"Home Address 2"}
+        defaultValue={home_address_2}
+      />
+      <InputComponent textInput={"Bank Card No."} defaultValue={card_number} />
+      <InputComponent
+        textInput={"Bank Account No."}
+        defaultValue={bank_account_no}
+      />
+      <InputComponent textInput={"Bank Name"} defaultValue={bank_name} />
+      <InputComponent
+        textInput={"Family Card Number"}
+        defaultValue={family_card_number}
+      />
+      <InputComponent
+        textInput={"Safety Insurance No."}
+        defaultValue={safety_insurance_no}
+      />
+      <InputComponent
+        textInput={"Health Insurance No."}
+        defaultValue={health_insurance_no}
+      />
+    </Form>
   );
 };
 

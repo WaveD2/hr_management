@@ -21,7 +21,7 @@ const ButtonComponent = (props: Button) => {
       className="flex items-center min-w-[90px] text-base justify-center py-2 px-3"
       style={props.style}>
       <p className="flex items-center gap-3">
-        {props.icon && <span className="h-8 w-8 leading-8">{props.icon}</span>}
+        {props.icon && <span className="mb-2">{props.icon}</span>}
         {props.textBtn}
       </p>
     </Button>

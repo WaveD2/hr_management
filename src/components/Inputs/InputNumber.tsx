@@ -3,7 +3,7 @@ import { InputNumber, Form } from "antd";
 
 interface IINumber {
   text: string;
-  defaultValue?: string | any;
+  value?: number | any;
 }
 
 const InputNumberComponent = (props: IINumber) => {
@@ -14,9 +14,14 @@ const InputNumberComponent = (props: IINumber) => {
   return (
     <Form.Item label={props.text} required>
       <InputNumber
+        value={props.value}
         min={1}
-        defaultValue={props.defaultValue}
-        style={{ width: "100%" }}
+        style={{
+          display: "flex",
+          width: "100%",
+          margin: "0 12px",
+          alignItems: "center",
+        }}
       />
     </Form.Item>
   );

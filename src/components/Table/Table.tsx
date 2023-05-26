@@ -45,7 +45,7 @@ const TableComponent = () => {
   const [source, setSource] = useState();
 
   const handleDelete = (id) => {
-    dispatch(employeeAction.deleteEmployeeImage(id));
+    dispatch(employeeAction.deleteEmployeeContractImage(id));
   };
   useEffect(() => {
     const newSource = select?.map((item, index) => ({

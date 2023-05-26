@@ -10,7 +10,7 @@ type ICallAPI = {
   baseUrl: string;
   isUrlParams: boolean;
 };
-// url: `https://api.hrm.div4.pgtest.co/api/v1/${props.params}?search=${props.key}&page=${props.page}`,
+
 async function callAPI(props: ICallAPI) {
   const { baseUrl, method, data, params, key, isUrlParams } = props;
   const url = isUrlParams ? baseUrl : `${baseUrl}${params}`;

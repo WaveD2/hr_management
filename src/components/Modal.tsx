@@ -7,7 +7,7 @@ import { API_PATHS } from "../services/api";
 
 interface IModal {
   title: string;
-  handleOk: Function;
+  handleOk?: Function;
 }
 
 const ModalComponent = (props: IModal) => {

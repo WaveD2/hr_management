@@ -15,7 +15,10 @@ export const convertColumTable = (cols) => {
             key !== "created_at" &&
             key !== "deleted_at" &&
             key !== "contracts" &&
-            key !== "users"
+            key !== "users" &&
+            key !== "company_id" &&
+            key !== "marriage_id" &&
+            key !== "position_id"
         )
         .map(([key, value]) => [key, value === null ? "" : value])
     )
@@ -27,5 +30,15 @@ export const convertColumTable = (cols) => {
     }
     return newObj;
   });
-  return newArray;
+
+  const aWithGenderStr = newArray.map((item) => {
+    if (item.gender === "0") {
+      return { ...item, gender: "Nữ" };
+    } else if (item.gender === "1") {
+      return { ...item, gender: "Nam" };
+    }
+    return item;
+  });
+
+  return aWithGenderStr;
 };

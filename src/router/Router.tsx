@@ -33,6 +33,7 @@ export const Routers: React.FC = () => {
           <Route path={ROUTES.forgotPassword} element={<ForgotPassword />} />
         </Route>
         {/* <Route path="/" element={<ProtectedRoute />} /> */}
+
         <Route path="/" element={<LayoutHome />}>
           <Route path={ROUTES.employee} element={<EmployeePage />} />
           <Route path={ROUTES.employee_info} element={<EmployeeInfoPage />} />

@@ -26,7 +26,7 @@ const Search = ({ page }: IPage) => {
 
   const { Search } = Input;
   const dispatch = useDispatch();
-  const handleChangeSearch = React.useCallback(async (e: Event) => {
+  const handleChangeSearch = (e: Event) => {
     const keySearch = e.target.value;
     console.log("pages", pages);
 
@@ -49,7 +49,7 @@ const Search = ({ page }: IPage) => {
       .catch((error: any) => {
         console.error(error);
       });
-  }, []);
+  };
 
   return (
     <Search

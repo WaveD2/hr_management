@@ -1,191 +1,191 @@
 @font-face {
-  font-family: "Sofia Pro";
-  src: url("./assets/sofia-pro-cufonfonts/SofiaPro-Black.woff2") format("woff2"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-Black.woff") format("woff"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-Black.svg#SofiaPro-Black")
-      format("svg");
+  font-family: 'Sofia Pro';
+  src: url('./assets/sofia-pro-cufonfonts/SofiaPro-Black.woff2') format('woff2'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-Black.woff') format('woff'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-Black.svg#SofiaPro-Black')
+      format('svg');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Sofia Pro";
-  src: url("./assets/sofia-pro-cufonfonts/SofiaPro-BoldItalic.woff2")
-      format("woff2"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-BoldItalic.woff") format("woff"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-BoldItalic.svg#SofiaPro-BoldItalic")
-      format("svg");
+  font-family: 'Sofia Pro';
+  src: url('./assets/sofia-pro-cufonfonts/SofiaPro-BoldItalic.woff2')
+      format('woff2'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-BoldItalic.woff') format('woff'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-BoldItalic.svg#SofiaPro-BoldItalic')
+      format('svg');
   font-weight: bold;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Sofia Pro";
-  src: url("./assets/sofia-pro-cufonfonts/SofiaPro-Bold.woff2") format("woff2"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-Bold.woff") format("woff"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-Bold.svg#SofiaPro-Bold")
-      format("svg");
+  font-family: 'Sofia Pro';
+  src: url('./assets/sofia-pro-cufonfonts/SofiaPro-Bold.woff2') format('woff2'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-Bold.woff') format('woff'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-Bold.svg#SofiaPro-Bold')
+      format('svg');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Sofia Pro";
-  src: url("./assets/sofia-pro-cufonfonts/SofiaPro-BlackItalic.woff2")
-      format("woff2"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-BlackItalic.woff")
-      format("woff"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-BlackItalic.svg#SofiaPro-BlackItalic")
-      format("svg");
+  font-family: 'Sofia Pro';
+  src: url('./assets/sofia-pro-cufonfonts/SofiaPro-BlackItalic.woff2')
+      format('woff2'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-BlackItalic.woff')
+      format('woff'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-BlackItalic.svg#SofiaPro-BlackItalic')
+      format('svg');
   font-weight: 900;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Sofia Pro";
-  src: url("./assets/sofia-pro-cufonfonts/SofiaPro-Light.woff2") format("woff2"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-Light.woff") format("woff"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-Light.svg#SofiaPro-Light")
-      format("svg");
+  font-family: 'Sofia Pro';
+  src: url('./assets/sofia-pro-cufonfonts/SofiaPro-Light.woff2') format('woff2'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-Light.woff') format('woff'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-Light.svg#SofiaPro-Light')
+      format('svg');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Sofia Pro";
-  src: url("./assets/sofia-pro-cufonfonts/SofiaPro-ExtraLightItalic.woff2")
-      format("woff2"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-ExtraLightItalic.woff")
-      format("woff"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-ExtraLightItalic.svg#SofiaPro-ExtraLightItalic")
-      format("svg");
+  font-family: 'Sofia Pro';
+  src: url('./assets/sofia-pro-cufonfonts/SofiaPro-ExtraLightItalic.woff2')
+      format('woff2'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-ExtraLightItalic.woff')
+      format('woff'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-ExtraLightItalic.svg#SofiaPro-ExtraLightItalic')
+      format('svg');
   font-weight: 200;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Sofia Pro";
-  src: url("./assets/sofia-pro-cufonfonts/SofiaPro-ExtraLight.woff2")
-      format("woff2"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-ExtraLight.woff") format("woff"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-ExtraLight.svg#SofiaPro-ExtraLight")
-      format("svg");
+  font-family: 'Sofia Pro';
+  src: url('./assets/sofia-pro-cufonfonts/SofiaPro-ExtraLight.woff2')
+      format('woff2'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-ExtraLight.woff') format('woff'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-ExtraLight.svg#SofiaPro-ExtraLight')
+      format('svg');
   font-weight: 200;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Sofia Pro";
-  src: url("./assets/sofia-pro-cufonfonts/SofiaPro-LightItalic.woff2")
-      format("woff2"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-LightItalic.woff")
-      format("woff"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-LightItalic.svg#SofiaPro-LightItalic")
-      format("svg");
+  font-family: 'Sofia Pro';
+  src: url('./assets/sofia-pro-cufonfonts/SofiaPro-LightItalic.woff2')
+      format('woff2'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-LightItalic.woff')
+      format('woff'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-LightItalic.svg#SofiaPro-LightItalic')
+      format('svg');
   font-weight: 300;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Sofia Pro";
-  src: url("./assets/sofia-pro-cufonfonts/SofiaPro-MediumItalic.woff2")
-      format("woff2"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-MediumItalic.woff")
-      format("woff"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-MediumItalic.svg#SofiaPro-MediumItalic")
-      format("svg");
+  font-family: 'Sofia Pro';
+  src: url('./assets/sofia-pro-cufonfonts/SofiaPro-MediumItalic.woff2')
+      format('woff2'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-MediumItalic.woff')
+      format('woff'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-MediumItalic.svg#SofiaPro-MediumItalic')
+      format('svg');
   font-weight: 500;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Sofia Pro";
-  src: url("./assets/sofia-pro-cufonfonts/SofiaPro-Medium.woff2")
-      format("woff2"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-Medium.woff") format("woff"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-Medium.svg#SofiaPro-Medium")
-      format("svg");
+  font-family: 'Sofia Pro';
+  src: url('./assets/sofia-pro-cufonfonts/SofiaPro-Medium.woff2')
+      format('woff2'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-Medium.woff') format('woff'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-Medium.svg#SofiaPro-Medium')
+      format('svg');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Sofia Pro";
-  src: url("./assets/sofia-pro-cufonfonts/SofiaPro.woff2") format("woff2"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro.woff") format("woff"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro.svg#SofiaPro") format("svg");
+  font-family: 'Sofia Pro';
+  src: url('./assets/sofia-pro-cufonfonts/SofiaPro.woff2') format('woff2'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro.woff') format('woff'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro.svg#SofiaPro') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Sofia Pro";
-  src: url("./assets/sofia-pro-cufonfonts/SofiaPro-Italic.woff2")
-      format("woff2"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-Italic.woff") format("woff"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-Italic.svg#SofiaPro-Italic")
-      format("svg");
+  font-family: 'Sofia Pro';
+  src: url('./assets/sofia-pro-cufonfonts/SofiaPro-Italic.woff2')
+      format('woff2'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-Italic.woff') format('woff'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-Italic.svg#SofiaPro-Italic')
+      format('svg');
   font-weight: normal;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Sofia Pro";
-  src: url("./assets/sofia-pro-cufonfonts/SofiaPro-SemiBold.woff2")
-      format("woff2"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-SemiBold.woff") format("woff"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-SemiBold.svg#SofiaPro-SemiBold")
-      format("svg");
+  font-family: 'Sofia Pro';
+  src: url('./assets/sofia-pro-cufonfonts/SofiaPro-SemiBold.woff2')
+      format('woff2'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-SemiBold.woff') format('woff'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-SemiBold.svg#SofiaPro-SemiBold')
+      format('svg');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Sofia Pro";
-  src: url("./assets/sofia-pro-cufonfonts/SofiaPro-SemiBoldItalic.woff2")
-      format("woff2"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-SemiBoldItalic.woff")
-      format("woff"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-SemiBoldItalic.svg#SofiaPro-SemiBoldItalic")
-      format("svg");
+  font-family: 'Sofia Pro';
+  src: url('./assets/sofia-pro-cufonfonts/SofiaPro-SemiBoldItalic.woff2')
+      format('woff2'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-SemiBoldItalic.woff')
+      format('woff'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-SemiBoldItalic.svg#SofiaPro-SemiBoldItalic')
+      format('svg');
   font-weight: 600;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Sofia Pro";
-  src: url("./assets/sofia-pro-cufonfonts/SofiaPro-UltraLightItalic.woff2")
-      format("woff2"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-UltraLightItalic.woff")
-      format("woff"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-UltraLightItalic.svg#SofiaPro-UltraLightItalic")
-      format("svg");
+  font-family: 'Sofia Pro';
+  src: url('./assets/sofia-pro-cufonfonts/SofiaPro-UltraLightItalic.woff2')
+      format('woff2'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-UltraLightItalic.woff')
+      format('woff'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-UltraLightItalic.svg#SofiaPro-UltraLightItalic')
+      format('svg');
   font-weight: 200;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Sofia Pro";
-  src: url("./assets/sofia-pro-cufonfonts/SofiaPro-UltraLight.woff2")
-      format("woff2"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-UltraLight.woff") format("woff"),
-    url("./assets/sofia-pro-cufonfonts/SofiaPro-UltraLight.svg#SofiaPro-UltraLight")
-      format("svg");
+  font-family: 'Sofia Pro';
+  src: url('./assets/sofia-pro-cufonfonts/SofiaPro-UltraLight.woff2')
+      format('woff2'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-UltraLight.woff') format('woff'),
+    url('./assets/sofia-pro-cufonfonts/SofiaPro-UltraLight.svg#SofiaPro-UltraLight')
+      format('svg');
   font-weight: 200;
   font-style: normal;
   font-display: swap;
@@ -224,7 +224,7 @@ button {
 }
 body {
   min-height: 100vh;
-  font-family: "Sofia Pro" !important;
+  font-family: 'Sofia Pro' !important;
   font-weight: 400;
   font-size: 16px;
   line-height: 1;
@@ -289,35 +289,35 @@ body {
 }
 .ant-col {
   min-width: auto !important;
-  /* flex-direction: row !important; */
+  flex: none;
 }
-.ant-row {
-  align-item: center;
-  gap: 12px;
-}
+.ant-form-item-required,
 .ant-row .ant-col label,
 .ant-row .ant-col input {
   width: 164px;
   line-height: 1.5;
   font-size: 16px;
   letter-spacing: -0.01em;
-  font-family: "Sofia Pro" !important;
+  font-family: 'Sofia Pro' !important;
   letter-spacing: -0.01em !important;
   font-weight: 400 !important;
   display: flex !important;
   flex-wrap: wrap !important;
 }
-.ant-form-item {
-  margin-right: 16px;
-}
+
 .ant-select-selector,
 .ant-row .ant-col input {
   min-width: 150px;
-  max-width: 450px !important;
+  max-width: 400px;
   width: 100%;
   height: 46px !important;
 }
-.ant-form-item-control-input {
+.ant-form-item-control-input-content {
+  width: 400px;
+}
+.ant-input-number,
+.ant-select {
+  max-width: 400px;
 }
 .ant-select-selector {
   height: 100% !important;

@@ -11,9 +11,12 @@ import TitleComponents from "../../components/TitleComponents";
 import Search from "../../components/Button/Search";
 import { useTranslation } from "react-i18next";
 import { convertColumTable } from "../../utils/convertColumTable";
+import { statusAction } from "../../redux/ReducerStatus/reducerStatus";
+import ModalComponent from "../../components/Modal";
 
 const EmployeePage: React.FC = () => {
   const { t } = useTranslation();
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [loadings, setLoadings] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [columns, setColumns] = useState();
@@ -76,25 +79,15 @@ const EmployeePage: React.FC = () => {
   }, [selector]);
 
   const rowSelection = {
+    selectedRowKeys,
+    onChange: (newSelectedRowKeys: React.Key[]) => {
+      setSelectedRowKeys(newSelectedRowKeys);
+    },
     onSelect: (record, selected, selectedRows) => {
-      console.log(
-        "record, selected, selectedRows",
-        record,
-        selected,
-        selectedRows
-      );
-
       setIsDisabled(selected);
       setDataDelete(selectedRows);
     },
     onSelectAll: (selected, selectedRows, changeRows) => {
-      console.log(
-        "selected, selectedRows, changeRows",
-        selected,
-        selectedRows,
-        changeRows
-      );
-
       setIsDisabled(selected);
       setDataDelete(selectedRows);
     },
@@ -131,13 +124,15 @@ const EmployeePage: React.FC = () => {
     });
 
     await getDetailTable();
+    setSelectedRowKeys([]);
+    dispatch(statusAction.isModal(false));
   };
 
   const handleAdd = () => {
     navigate("/employee/create-or-update");
   };
   const handleDelete = () => {
-    deleteMultiple();
+    dispatch(statusAction.isModal(true));
   };
 
   return (
@@ -181,6 +176,7 @@ const EmployeePage: React.FC = () => {
           defaultPageSize: per_page,
           showSizeChanger: false,
           onChange: (page, pageSize) => {
+            setSelectedRowKeys([]);
             handleChangeSearch({ page, pageSize });
           },
         }}
@@ -195,6 +191,11 @@ const EmployeePage: React.FC = () => {
           };
         }}
         style={{ cursor: "pointer", maxHeight: "525px" }}
+      />
+
+      <ModalComponent
+        title="Do you have delete user?"
+        handleOk={deleteMultiple}
       />
     </section>
   );
