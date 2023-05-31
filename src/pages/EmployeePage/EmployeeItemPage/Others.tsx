@@ -7,21 +7,21 @@ import callAPI from "../../../services/fetchApi";
 import { API_PATHS } from "../../../services/api";
 import TextArea from "antd/es/input/TextArea";
 import UpLoadFile from "../../../components/Button/UpLoadFile";
-import * as moment from "moment";
 import { useDispatch } from "react-redux";
 import { employeeAction } from "../../../redux/ReducerEmployee/reducerEmployee";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-
+import { useParams } from "react-router";
+import { log } from "console";
 dayjs.extend(customParseFormat);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
 const Others = () => {
   const dispatch = useDispatch();
-
+  const { id } = useParams();
   const [grade, setGrade] = useState();
   const [benefit, setBenefit] = useState();
   const [value, setValue] = useState("");
@@ -64,13 +64,16 @@ const Others = () => {
   }, []);
 
   const handleImageUpload = (binaryData: File) => {
+    console.log("binaryData", binaryData);
+
     const dateTime = binaryData.lastModifiedDate;
 
     const dateObject = new Date(dateTime);
     const formattedDate = dayjs(dateObject).format("YYYY/MM/DD");
 
     dispatch(
-      employeeAction.addEmployeeImage({
+      employeeAction.addEmployeeOtherImage({
+        employee_id: id,
         id: Math.random(),
         name: binaryData.name,
         date: formattedDate,

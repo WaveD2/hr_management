@@ -6,26 +6,28 @@ import Search from "../Button/Search";
 import Header from "../Home/Header";
 import Content from "./Content";
 import ButtonComponent from "../Button/Button";
-import { useParams, Outlet, useLocation, Link } from "react-router-dom";
+import { Outlet, useLocation, Link } from "react-router-dom";
 import TitleComponents from "../TitleComponents";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router";
+import { log } from "console";
 
 const LayoutHome = () => {
   const location = useLocation();
   const { pathname } = location;
+  const { id } = useParams();
   const pathnames = pathname.split("/").filter((item) => item);
 
-  const deletePathNameFinal = pathnames.pop(); // element path delete
-
-  function getTitle(href: string): string {
-    if (href === "employee") {
-      return "Employee Management";
-    } else if (href === "create-or-update") {
+  function getTitle(href: string) {
+    if (href === "create-or-update" && id) {
       return "Edit employee";
-    } else {
-      return "";
+    } else if (href === "create-or-update" && !id) {
+      return "Add employee";
+    } else if (href === "employee") {
+      return "Employee Management";
     }
   }
+
   const listPathNames = pathnames.map((item) => {
     const newObj = {
       href: item,

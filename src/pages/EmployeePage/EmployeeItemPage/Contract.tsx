@@ -27,7 +27,7 @@ const Contract = () => {
     (state: any) => state?.employee.employeeDetail
   );
 
-  const { contract_start_date } = detailTable;
+  const { contract_start_date, id } = detailTable;
 
   const handleOnFinish = (value) => {
     const dateString = value.contractDate.$d;
@@ -38,6 +38,7 @@ const Contract = () => {
 
     dispatch(
       employeeAction.addEmployeeContractImage({
+        employee_id: id,
         id: Math.random(),
         name: nameString,
         date: formattedDate,

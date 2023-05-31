@@ -4,7 +4,8 @@ const initialState = {
   employeeListValueTable: [],
   employeeDetail: [],
   employeeSalary_Wages: [],
-  employeeImage: [],
+  employeeContractImage: [],
+  employeeOtherImage: [],
 };
 const employeeSlice = createSlice({
   name: "employee",
@@ -20,10 +21,18 @@ const employeeSlice = createSlice({
       state.employeeSalary_Wages = action.payload;
     },
     addEmployeeContractImage: (state, action) => {
-      state.employeeImage.push(action.payload);
+      state.employeeContractImage.push(action.payload);
     },
     deleteEmployeeContractImage: (state, action) => {
-      state.employeeImage = state.employeeImage.filter(
+      state.employeeContractImage = state.employeeContractImage.filter(
+        (item: any) => item?.id !== action.payload
+      );
+    },
+    addEmployeeOtherImage: (state, action) => {
+      state.employeeOtherImage.push(action.payload);
+    },
+    deleteEmployeeOtherImage: (state, action) => {
+      state.employeeOtherImage = state.employeeOtherImage.filter(
         (item: any) => item?.id !== action.payload
       );
     },
