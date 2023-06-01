@@ -6,6 +6,7 @@ const initialState = {
   employeeSalary_Wages: [],
   employeeContractImage: [],
   employeeOtherImage: [],
+  employeePage: 1,
 };
 const employeeSlice = createSlice({
   name: "employee",
@@ -35,6 +36,9 @@ const employeeSlice = createSlice({
       state.employeeOtherImage = state.employeeOtherImage.filter(
         (item: any) => item?.id !== action.payload
       );
+    },
+    editEmployeePage: (state, action) => {
+      state.employeePage = action.payload;
     },
   },
 });

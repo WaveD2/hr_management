@@ -13,6 +13,7 @@ import ModalComponent from "../Modal";
 import "./style.css";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
+import { ACCESS_TOKEN_KEY } from "../../constants/validate";
 
 const Header = () => {
   const { Header } = Layout;
@@ -41,7 +42,7 @@ const Header = () => {
       params: "logout",
     });
     dispatch(statusAction.isModal(false));
-    Cookies.remove("ACCESS_TOKEN_KEY");
+    Cookies.remove(ACCESS_TOKEN_KEY);
     navigate("/auth/login");
   };
 
@@ -73,7 +74,7 @@ const Header = () => {
           <TitleComponents title={`HR ${t("home lang.management system")}`} />
         </div>
 
-        <div className="flex items-center gap-4 relative ">
+        <div className="wrapper flex items-center gap-4 relative ">
           <Select
             className="w-[150px] overflow-hidden "
             defaultValue={currentLang}
@@ -91,7 +92,9 @@ const Header = () => {
               style={{ cursor: "pointer" }}
             />
           </Space>
+
           <Modal
+            mask={false}
             open={isModalOpen}
             onCancel={handleCancel}
             className="modal-header absolute top-16 right-11 bg-[#e4e2e2] rounded-xl">

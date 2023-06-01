@@ -236,10 +236,12 @@ body {
   max-width: 360px !important;
   background: none !important;
 }
-/* .ant-modal,
+/* .modal-header,
+.ant-modal,
 .ant-modal-mask {
   background: none !important;
 } */
+
 .flexColCenter {
   display: flex;
   justify-content: center;

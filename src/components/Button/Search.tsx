@@ -1,31 +1,21 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, Event, useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "antd";
-import Cookies from "js-cookie";
-import { ACCESS_TOKEN_KEY } from "../../constants/validate";
-import axios, { AxiosResponse } from "axios";
-import { useDispatch } from "react-redux";
+import { AxiosResponse } from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import { employeeAction } from "../../redux/ReducerEmployee/reducerEmployee";
 import callAPI from "../../services/fetchApi";
 import { API_PATHS } from "../../services/api";
-import { useParams } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
-
-interface IPage {
-  page: string;
-}
 
 const Search = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
+  const selectorPage = useSelector((state: any) => state.employee.employeePage);
+
   const { Search } = Input;
 
-  console.log("location", location);
-
   const searchParams = new URLSearchParams(location.search);
-  console.log("searchParams", searchParams);
-  console.log("/", searchParams.get("page"));
   const [page, setPage] = useState(parseInt(searchParams.get("page") || "1"));
   const [prevPage, setPrevPage] = useState(
     parseInt(searchParams.get("page") || "1")
@@ -36,19 +26,16 @@ const Search = () => {
   const [prevSearchValue, setPrevSearchValue] = useState(
     searchParams.get("search") || ""
   );
-  useEffect(() => {
-    setPage(page);
-  }, [page]);
 
   useEffect(() => {
-    const fetchApi = async () => {
+    const fetchApi = async (searchValue: string, page: number) => {
       await callAPI({
         baseUrl: API_PATHS.detailEmployee,
         method: "GET",
         isUrlParams: true,
         key: {
-          search: searchValue,
           page: page,
+          search: searchValue,
         },
       })
         .then((response: AxiosResponse) => {
@@ -61,10 +48,14 @@ const Search = () => {
           console.error(error);
         });
     };
-    fetchApi();
+    fetchApi(searchValue, page);
   }, [searchValue, page]);
 
-  const handleChangeSearch = (e: Event) => {
+  useEffect(() => {
+    setPage(selectorPage);
+  }, [selectorPage]);
+
+  const handleChangeSearch = (e) => {
     setSearchValue(e.target.value);
   };
 

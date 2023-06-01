@@ -94,26 +94,15 @@ const EmployeePage: React.FC = () => {
   };
 
   const handleChangeSearch = React.useCallback(async ({ page, pageSize }) => {
-    navigate(`/employee?page=${page}`);
-
-    const res = await callAPI({
-      baseUrl: API_PATHS.detailEmployee,
-      method: "GET",
-      isUrlParams: true,
-      key: {
-        search: "",
-        page,
-      },
-    });
-    const resData = res?.data.data;
-    for (let i = 0; i < resData.data.length; i++) {
-      resData.data[i]["key"] = i;
+    if (current_page === 1 && last_page === 1) {
+      dispatch(employeeAction.editEmployeePage(1));
+    } else {
+      dispatch(employeeAction.editEmployeePage(page));
     }
-    dispatch(employeeAction.addListValuesTable(resData));
   }, []);
 
   const deleteMultiple = async () => {
-    const record_ids = dataDelete?.map((item) => item.id);
+    const record_ids = dataDelete?.map((item: any) => item.id);
 
     await callAPI({
       baseUrl: API_PATHS.detailEmployee,
@@ -140,7 +129,7 @@ const EmployeePage: React.FC = () => {
       <div className="flex justify-between items-center pb-3  #">
         <TitleComponents title={`HR ${t("home lang.management system")}`} />
 
-        <Search page={current_page} />
+        <Search />
       </div>
       <div className="flex justify-end ml-1 p-3 gap-3 border-b-2 border-indigo-500 mb-3">
         <ButtonComponent

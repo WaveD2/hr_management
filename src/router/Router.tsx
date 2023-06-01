@@ -4,9 +4,6 @@ import { ROUTES } from "../constants/routerConstants";
 import Cookies from "js-cookie";
 import { ACCESS_TOKEN_KEY } from "../constants/validate";
 
-import ProtectedRoute from "../context/ProtectedRoute";
-import ProtectedRouteLogin from "../context/ProtectedRouteLogin";
-import RouterLogin from "./RouterLogin";
 const LayoutHome = React.lazy(() => import("../components/Layout/LayoutHome"));
 const ForgotPassword = React.lazy(
   () => import("../pages/Login/LoginPageItem/ForgotPassword")
@@ -23,6 +20,14 @@ const LoginPage = React.lazy(() => import("../pages/Login/LoginPage"));
 const ErrorPage = React.lazy(() => import("../pages/ErrorPage"));
 export const Routers: React.FC = () => {
   const auth = Cookies.get(ACCESS_TOKEN_KEY);
+  const location = useLocation();
+
+  if (!auth && !location.pathname.includes(ROUTES.auth)) {
+    return <Navigate to="/auth/login" />;
+  }
+  if (auth && location.pathname.includes(ROUTES.auth)) {
+    return <Navigate to={ROUTES.employee} />;
+  }
 
   return (
     <Suspense fallback={<div>Loading.....</div>}>
@@ -32,7 +37,6 @@ export const Routers: React.FC = () => {
           <Route index path={ROUTES.login} element={<Login />} />
           <Route path={ROUTES.forgotPassword} element={<ForgotPassword />} />
         </Route>
-        {/* <Route path="/" element={<ProtectedRoute />} /> */}
 
         <Route path="/" element={<LayoutHome />}>
           <Route path={ROUTES.employee} element={<EmployeePage />} />
@@ -45,3 +49,9 @@ export const Routers: React.FC = () => {
     </Suspense>
   );
 };
+// import ProtectedRoute from "../context/ProtectedRoute";
+// import ProtectedRouteLogin from "../context/ProtectedRouteLogin";
+// import RouterLogin from "./RouterLogin";
+{
+  /* <Route path="/" element={<ProtectedRoute />} /> */
+}
