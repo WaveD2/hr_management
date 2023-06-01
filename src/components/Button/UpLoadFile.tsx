@@ -46,7 +46,7 @@ const UpLoadFile: React.FC<ImageUploaderProps> = ({
       <Button
         onClick={handleUpload}
         className="
-        border-dotted border-2 border-[#a6e8fcee] bg-inherit text-[#2ca1c5]"
+         fontFamily  border-dotted border-2 border-[#a6e8fcee] bg-inherit text-[#2ca1c5]"
         icon={<UploadOutlined />}>
         Upload
       </Button>

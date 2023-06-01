@@ -22,6 +22,7 @@ const InputSelect = (props: ISelect) => {
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
   };
+
   return (
     <Form.Item
       initialValue={props.defaultValue}
@@ -41,7 +42,8 @@ const InputSelect = (props: ISelect) => {
           borderRadius: "6px",
         }}
         defaultValue={
-          props?.defaultValue || props?.valueSelect[props?.indexSelect]
+          props?.defaultValue ||
+          props?.valueSelect[props?.indexSelect === "nam" ? 1 : 0]
         }>
         {props.valueSelect?.map((item, index) => (
           <Select.Option key={index}>{item?.name || item}</Select.Option>

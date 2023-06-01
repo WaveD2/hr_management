@@ -9,15 +9,8 @@ import TextArea from "antd/es/input/TextArea";
 import UpLoadFile from "../../../components/Button/UpLoadFile";
 import { useDispatch } from "react-redux";
 import { employeeAction } from "../../../redux/ReducerEmployee/reducerEmployee";
-import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
-import utc from "dayjs/plugin/utc";
-import timezone from "dayjs/plugin/timezone";
 import { useParams } from "react-router";
-import { log } from "console";
-dayjs.extend(customParseFormat);
-dayjs.extend(utc);
-dayjs.extend(timezone);
+import { convertDate } from "../../../utils/convertTime";
 
 const Others = () => {
   const dispatch = useDispatch();
@@ -25,6 +18,8 @@ const Others = () => {
   const [grade, setGrade] = useState();
   const [benefit, setBenefit] = useState();
   const [value, setValue] = useState("");
+  const [timeDate, setTimeDate] = useState<string>();
+  const [binaryFile, setBinaryFile] = useState<any>();
 
   useEffect(() => {
     const fetchAPI = async () => {
@@ -63,27 +58,27 @@ const Others = () => {
     fetchAPI();
   }, []);
 
-  const handleImageUpload = (binaryData: File) => {
-    console.log("binaryData", binaryData);
+  const handleImageUpload = async (binaryData) => {
+    const dateString = binaryData.lastModifiedDate;
+    const formattedDate = await convertDate({ dateString });
+    setTimeDate(formattedDate);
+    setBinaryFile(binaryData);
+  };
 
-    const dateTime = binaryData.lastModifiedDate;
-
-    const dateObject = new Date(dateTime);
-    const formattedDate = dayjs(dateObject).format("YYYY/MM/DD");
-
+  useEffect(() => {
     dispatch(
       employeeAction.addEmployeeOtherImage({
         employee_id: id,
         id: Math.random(),
-        name: binaryData.name,
-        date: formattedDate,
-        document: binaryData,
+        name: binaryFile?.name,
+        date: timeDate,
+        document: binaryFile,
       })
     );
-  };
+  }, [timeDate, binaryFile]);
 
   return (
-    <section>
+    <section className="fontFamily">
       <InputSelect
         textSelect="Grade"
         valueSelect={grade}
@@ -119,7 +114,7 @@ const Others = () => {
           isShowUploadList={false}
         />
 
-        <TableDetail />
+        <TableDetail typeTable="other" />
       </div>
     </section>
   );

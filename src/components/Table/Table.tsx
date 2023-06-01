@@ -12,6 +12,10 @@ interface DataType {
   action: string;
 }
 
+interface IKey {
+  typeTable: "other" | "contract" | "table";
+}
+
 const columns: ColumnsType<DataType> = [
   {
     title: "No",
@@ -39,16 +43,31 @@ const columns: ColumnsType<DataType> = [
   },
 ];
 
-const TableComponent = () => {
+const TableComponent = ({ typeTable }: IKey) => {
+  console.log(typeTable);
+
   const dispatch = useDispatch();
-  const select = useSelector((state: any) => state.employee.employeeImage);
+  const select = useSelector((state: any) => state.employee);
+  const { employeeContractImage, employeeOtherImage } = select;
+  console.log(employeeContractImage, employeeOtherImage);
+
+  const [dataRender, setDataRender] = useState();
   const [source, setSource] = useState();
 
-  const handleDelete = (id) => {
-    dispatch(employeeAction.deleteEmployeeContractImage(id));
-  };
   useEffect(() => {
-    const newSource = select?.map((item, index) => ({
+    typeTable === "other"
+      ? setDataRender(employeeOtherImage)
+      : setDataRender(employeeContractImage);
+  }, [employeeContractImage, employeeOtherImage]);
+
+  const handleDelete = (id) => {
+    typeTable === "other"
+      ? dispatch(employeeAction.deleteEmployeeOtherImage(id))
+      : dispatch(employeeAction.deleteEmployeeContractImage(id));
+  };
+
+  useEffect(() => {
+    const newSource = dataRender?.map((item, index) => ({
       ...item,
       no: index + 1,
       action: (
@@ -66,15 +85,16 @@ const TableComponent = () => {
     console.log("newSource", newSource);
 
     setSource(newSource);
-  }, [select]);
+  }, [dataRender]);
 
   return (
     <Table
       style={{
+        overflowY: "scroll",
         maxHeight: "225px",
         minHeight: "225px",
       }}
-      className="w-full flex-1 border-2 rounded-xl border-[#e2e1e1df]"
+      className="w-full flex-1 border-2 rounded-xl border-[#e2e1e1df] fontFamily"
       columns={columns}
       dataSource={source}
       pagination={false}

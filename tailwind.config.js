@@ -6,6 +6,9 @@ export default {
       boxShadow: {
         formBoxShadow: " 0px 10px 25px rgba(215, 219, 223, 0.5);",
       },
+      fontFamily: {
+        fontSofia: "Sofia Pro",
+      },
     },
   },
   plugins: [],

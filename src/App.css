@@ -229,7 +229,9 @@ body {
   font-size: 16px;
   line-height: 1;
 }
-
+.ant-layout {
+  font-family: 'Sofia Pro' !important;
+}
 .ant-modal {
   max-width: 360px !important;
   background: none !important;
@@ -290,6 +292,23 @@ body {
 .ant-col {
   min-width: auto !important;
   flex: none;
+}
+.ant-table-thead .ant-table-cell {
+  background-color: rgb(236, 238, 240) !important;
+  border: 2px solid #fff;
+  padding: 3px 10px !important;
+  color: rgb(17, 24, 28);
+  line-height: 1.5rem;
+  font-size: 14px;
+  font-weight: 600;
+}
+.ant-table-row .ant-table-cell {
+  color: rgb(104, 112, 118);
+  padding: 0px 10px;
+  border: 1px solid white;
+  line-height: 1.5;
+  font-size: 12px;
+  font-weight: 400;
 }
 .ant-form-item-required,
 .ant-row .ant-col label,

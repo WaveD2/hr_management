@@ -52,7 +52,7 @@ const Contract = () => {
   };
 
   return (
-    <section>
+    <section className="fontFamily">
       <InputDate
         defaultValue={contract_start_date}
         textInputDate="Date Start"
@@ -108,7 +108,7 @@ const Contract = () => {
           </Form>
           <hr />
           <section className="mt-4 ">
-            <TableComponent />
+            <TableComponent typeTable="contract" />
           </section>
         </div>
       </div>

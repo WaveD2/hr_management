@@ -162,6 +162,7 @@ const EmployeePage: React.FC = () => {
       </div>
 
       <Table
+        bordered
         rowSelection={rowSelection}
         columns={columns}
         tableLayout={"auto"}
