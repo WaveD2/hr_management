@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "antd";
+import { Modal, Table } from "antd";
 import { useNavigate } from "react-router-dom";
 import callAPI from "../../services/fetchApi";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,16 +11,20 @@ import TitleComponents from "../../components/TitleComponents";
 import Search from "../../components/Button/Search";
 import { useTranslation } from "react-i18next";
 import { convertColumTable } from "../../utils/convertColumTable";
-import { statusAction } from "../../redux/ReducerStatus/reducerStatus";
-import ModalComponent from "../../components/Modal";
+
+interface ICol {
+  title: string;
+  dataIndex: string;
+  width: 100;
+}
 
 const EmployeePage: React.FC = () => {
   const { t } = useTranslation();
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [loadings, setLoadings] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
-  const [columns, setColumns] = useState();
-  const [dataTable, setDataTable] = useState([]);
+  const [columns, setColumns] = useState<any>();
+  const [dataTable, setDataTable] = useState<any>([]);
   const [dataDelete, setDataDelete] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -29,6 +33,7 @@ const EmployeePage: React.FC = () => {
     (state: any) => state.employee.employeeListValueTable
   );
   const { current_page, data, last_page, from, per_page, total, to } = selector;
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const getDetailTable = async () => {
     setLoadings(true);
@@ -38,14 +43,14 @@ const EmployeePage: React.FC = () => {
       isUrlParams: true,
     })
       .then((res) => {
-        const cols = [];
+        const cols: ICol[] = [];
         const resData = res?.data.data;
         const dataCol = convertColumTable(resData.data) || {};
 
         for (const key in dataCol[0]) {
           let newKey = key.replace(/_/g, " ").replace("_id", "");
           newKey = newKey.replace(/\b\w/g, (c) => c.toUpperCase());
-          const col = {
+          const col: ICol = {
             title: newKey,
             dataIndex: key,
             width: 100,
@@ -114,14 +119,14 @@ const EmployeePage: React.FC = () => {
 
     await getDetailTable();
     setSelectedRowKeys([]);
-    dispatch(statusAction.isModal(false));
+    setIsModalOpen(false);
   };
 
   const handleAdd = () => {
     navigate("/employee/create-or-update");
   };
   const handleDelete = () => {
-    dispatch(statusAction.isModal(true));
+    setIsModalOpen(true);
   };
 
   return (
@@ -183,9 +188,15 @@ const EmployeePage: React.FC = () => {
         style={{ cursor: "pointer", maxHeight: "525px" }}
       />
 
-      <ModalComponent
+      <Modal
+        centered
+        style={{ fontSize: "24px" }}
         title="Do you have delete user?"
-        handleOk={deleteMultiple}
+        open={isModalOpen}
+        cancelText={"No"}
+        okText={"Ok"}
+        onOk={deleteMultiple}
+        onCancel={() => setIsModalOpen(false)}
       />
     </section>
   );

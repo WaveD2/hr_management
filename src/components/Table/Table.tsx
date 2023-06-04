@@ -44,12 +44,9 @@ const columns: ColumnsType<DataType> = [
 ];
 
 const TableComponent = ({ typeTable }: IKey) => {
-  console.log(typeTable);
-
   const dispatch = useDispatch();
   const select = useSelector((state: any) => state.employee);
   const { employeeContractImage, employeeOtherImage } = select;
-  console.log(employeeContractImage, employeeOtherImage);
 
   const [dataRender, setDataRender] = useState();
   const [source, setSource] = useState();
@@ -82,7 +79,6 @@ const TableComponent = ({ typeTable }: IKey) => {
         </Tag>
       ),
     }));
-    console.log("newSource", newSource);
 
     setSource(newSource);
   }, [dataRender]);

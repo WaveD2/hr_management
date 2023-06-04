@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import InputNumberComponent from "../../../components/Inputs/InputNumber";
 import callAPI from "../../../services/fetchApi";
 import { AxiosResponse } from "axios";

@@ -8,6 +8,7 @@ import SalaryAndWages from "./EmployeeItemPage/SalaryAndWages";
 import ButtonComponent from "../../components/Button/Button";
 import TitleComponents from "../../components/TitleComponents";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const ListTab = [
   { id: 1, title: "Employee Information", component: <Information /> },
@@ -17,16 +18,25 @@ const ListTab = [
   { id: 5, title: "Others", component: <Others /> },
 ];
 const EmployeeInfoPage = () => {
+  const select = useSelector((state: any) => state.employee);
+
   const { t } = useTranslation(["home"]);
 
   const onChange = (key: string) => {
     console.log(key);
   };
+
+  const handleSaveEmployee = () => {
+    //https://api.hrm.div4.pgtest.co/api/v1/employee
+    console.log("select", select);
+  };
+
   return (
     <section>
       <div className="flex justify-between items-center pb-3  #">
         <TitleComponents title={`HR ${t("home lang.management system")}`} />
         <ButtonComponent
+          handleCLick={handleSaveEmployee}
           textBtn={t("home lang.save change")}
           style={{ background: "rgb(0, 145, 255)", color: "#Fff" }}
         />

@@ -1,6 +1,6 @@
-export const convertColumTable = (cols) => {
-  const newObj = Object?.keys(cols[0]);
-  const filteredKeys = newObj.filter((key) =>
+export const convertColumTable = (cols: Object[]) => {
+  const newObj = cols[0] ? Object?.keys(cols[0]) : [];
+  const filteredKeys = newObj?.filter((key) =>
     cols.some((obj) => obj[key] !== null)
   );
 
@@ -31,7 +31,7 @@ export const convertColumTable = (cols) => {
     return newObj;
   });
 
-  const aWithGenderStr = newArray.map((item) => {
+  const aWithGenderStr = newArray.map((item: any) => {
     if (item.gender === "0") {
       return { ...item, gender: "Nữ" };
     } else if (item.gender === "1") {

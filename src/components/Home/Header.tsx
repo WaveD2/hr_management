@@ -22,6 +22,7 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpenLogout, setIsModalOpenLogout] = useState(false);
   const [isModalChildren, setIsModalChildren] = useState(false);
   const [detailUser, setDetailUser] = useState<any>();
 
@@ -41,7 +42,6 @@ const Header = () => {
       method: "POST",
       params: "logout",
     });
-    dispatch(statusAction.isModal(false));
     Cookies.remove(ACCESS_TOKEN_KEY);
     navigate("/auth/login");
   };
@@ -126,7 +126,7 @@ const Header = () => {
 
               <Button
                 block
-                onClick={() => dispatch(statusAction.isModal(true))}
+                onClick={() => setIsModalOpenLogout(true)}
                 style={{
                   margin: "10px 0",
                   padding: "8px 22px",
@@ -144,9 +144,16 @@ const Header = () => {
           </Modal>
         </div>
       </Header>
-      <ModalComponent
-        title="Do you wish to sign out?"
-        handleOk={handleLogout}
+
+      <Modal
+        centered
+        style={{ fontSize: "24px" }}
+        title="Do you have logout?"
+        open={isModalOpenLogout}
+        cancelText={"No"}
+        okText={"Ok"}
+        onOk={handleLogout}
+        onCancel={() => setIsModalOpenLogout(false)}
       />
     </section>
   );

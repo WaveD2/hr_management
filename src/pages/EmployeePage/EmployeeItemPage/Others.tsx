@@ -14,10 +14,10 @@ import { convertDate } from "../../../utils/convertTime";
 
 const Others = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
-  const [grade, setGrade] = useState();
+  const { id } = useParams<string>();
+  const [grade, setGrade] = useState<string>();
   const [benefit, setBenefit] = useState();
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState<string>("");
   const [timeDate, setTimeDate] = useState<string>();
   const [binaryFile, setBinaryFile] = useState<any>();
 
