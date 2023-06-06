@@ -45,11 +45,13 @@ const Details = () => {
         defaultValue="Choose Marriage"
         valueSelect={selectMarriage}
         textSelect={"Marriage Status"}
+        keySelect="marriage_code"
       />
       <InputSelect
         defaultValue="Choose Position"
         valueSelect={selectPosition}
         textSelect={"Position"}
+        keySelect="position_name"
       />
 
       <CheckBox isDisabled={false} title="Entitled OT" isChecked={true} />

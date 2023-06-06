@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   employeeListValueTable: [],
+  employeeInfoDetailUser : [],
   employeeDetail: [],
   employeeSalary_Wages: [],
   employeeContractImage: [],
@@ -11,11 +12,14 @@ const initialState = {
 const employeeSlice = createSlice({
   name: "employee",
   initialState,
-  reducers: {
-    addListValuesTable: (state, action) => {
+  reducers: { 
+    addInfoDetailUser: (state, action) => {
+      state.employeeInfoDetailUser = { ...state.employeeInfoDetailUser ,  ...action.payload};
+    },
+    addListValuesTable: (state, action) => {    
       state.employeeListValueTable = action.payload;
     },
-    detailValueTable: (state, action) => {
+    detailValueTable: (state, action) => {   
       state.employeeDetail = action.payload;
     },
     addEmployeeSalary_Wages: (state, action) => {

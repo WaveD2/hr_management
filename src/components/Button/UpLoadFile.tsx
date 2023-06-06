@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { UploadOutlined } from "@ant-design/icons";
-import type { UploadProps } from "antd";
+import type { UploadFile, UploadProps } from "antd";
 import { Button, message, Upload } from "antd";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -9,38 +9,56 @@ interface ImageUploaderProps {
   onImageUpload: (binaryData: File) => void;
   isShowUploadList: boolean;
   isMultiple: boolean;
+   
 }
 
 const UpLoadFile: React.FC<ImageUploaderProps> = ({
   onImageUpload,
   isShowUploadList,
   isMultiple,
+   
+   
 }) => {
-  const [listImg, setImg] = React.useState();
+ 
   const dispatch = useDispatch();
+  const [fileList, setFileList] = useState<UploadFile[]>([
+    {
+      uid: "-1",
+      name: "xxx.png",
+      status: "done",
+      url: "http://www.baidu.com/xxx.png"
+    }
+  ]);
+
 
   const handleFileChange = (event) => {
-    const file = event.file.originFileObj;
-    onImageUpload(file);
-    // if (file) {
-    //   const reader = new FileReader();
-    //   reader.onload = () => {
-    //     const binaryData = reader.result as ArrayBuffer;
-    //     console.log("a", binaryData); // dat
-    //     onImageUpload(binaryData);
-    //   };
-    //   reader.readAsArrayBuffer(file);
-    // }
+    let newFileList = [...event.fileList];
+    newFileList = newFileList.slice(-1);
+    newFileList = newFileList.map((file) => {
+      if (file.response) {
+        file.url = file.response.url;
+      }
+      return file;
+    });
+
+    setFileList(newFileList);
+    onImageUpload(event.file.originFileObj)
+     
+ 
   };
   const handleUpload = () => {
     // dispatch(employeeAction.addEmployeeImage("helo"));
   };
 
+
+  console.log("fileList" ,fileList);
+  
   return (
     <Upload
       showUploadList={isShowUploadList}
       name="uploadFile"
       maxCount={10}
+      fileList={fileList}
       multiple={isMultiple}
       onChange={handleFileChange}>
       <Button
@@ -50,6 +68,7 @@ const UpLoadFile: React.FC<ImageUploaderProps> = ({
         icon={<UploadOutlined />}>
         Upload
       </Button>
+      <span>Thiếu </span>
     </Upload>
   );
 };

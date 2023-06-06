@@ -2,6 +2,8 @@ import React from "react";
 import { Form, DatePicker } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import {useDispatch} from "react-redux";
+import { employeeAction } from "../../redux/ReducerEmployee/reducerEmployee";
 
 dayjs.extend(customParseFormat);
 interface IInputDate {
@@ -10,7 +12,9 @@ interface IInputDate {
   isDisable?: boolean;
   textInputDate: string;
   nameInputDate?: string;
-  handleChangeDate?: Function;
+  handleChangeDate?: Function | any;
+  keyInput ?:string;
+
 }
 
 const validateMessages = {
@@ -27,11 +31,22 @@ const dateFormat = "YYYY/MM/DD";
 
 const InputDate = (props: IInputDate) => {
   const { RangePicker } = DatePicker;
+  const dispatch = useDispatch();
 
   return (
     <Form.Item label={props.textInputDate} name={props.nameInputDate}>
       {props.typeInputDate === "datePicker" ? (
         <DatePicker
+         onBlur ={(e)=>{   
+          const keyUser : string | any = props.keyInput;
+          const valueUser : string | number | any = e.target.value;
+
+          const newKeyUser= {};
+          newKeyUser[keyUser] = valueUser ;
+        
+          dispatch(employeeAction.addInfoDetailUser(newKeyUser));
+
+        }}
           onChange={props.handleChangeDate}
           defaultValue={
             props.defaultValue && dayjs(props.defaultValue, dateFormat)

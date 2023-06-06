@@ -82,6 +82,7 @@ const TableComponent = ({ typeTable }: IKey) => {
 
     setSource(newSource);
   }, [dataRender]);
+console.log("source" ,source);
 
   return (
     <Table

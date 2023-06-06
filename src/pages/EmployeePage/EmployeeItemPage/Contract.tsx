@@ -18,8 +18,8 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 const Contract = () => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  // const [isShowUploadLists, setIsShowUploadList] = useState(true);
+  const [selectedFile, setSelectedFile] = useState<File>();
+ 
   const [name, setName] = useState("");
 
   const dispatch = useDispatch();
@@ -30,12 +30,14 @@ const Contract = () => {
   const { contract_start_date, id } = detailTable;
 
   const handleOnFinish = (value) => {
+    
     const dateString = value.contractDate.$d;
     const dateObject = new Date(dateString);
     const formattedDate = dayjs(dateObject).format("YYYY/MM/DD");
-
+    
     const nameString = value.contractName;
-
+    console.log("selectedFile && formattedDate && nameString" ,selectedFile ,formattedDate ,nameString);
+  if(selectedFile && formattedDate && nameString ){ 
     dispatch(
       employeeAction.addEmployeeContractImage({
         employee_id: id,
@@ -44,10 +46,15 @@ const Contract = () => {
         date: formattedDate,
         document: selectedFile,
       })
-    );
+    )}
+    else{
+      alert("thiếu ")
+    }
   };
 
   const handleImageUpload = (binaryData: File) => {
+   console.log("binaryData" ,binaryData);
+  
     setSelectedFile(binaryData);
   };
 
@@ -58,6 +65,7 @@ const Contract = () => {
         textInputDate="Date Start"
         typeInputDate="datePicker"
         nameInputDate="date-start"
+        keyInput="contract_start_date"
       />
       <InputComponent
         textInput="Employee Type"
@@ -65,6 +73,8 @@ const Contract = () => {
         defaultValue="Part-time"
         valueInput="Part-time"
         name="employee-type"
+       
+
       />
       <div
         className="flex flex-col rounded-md"
@@ -84,8 +94,10 @@ const Contract = () => {
             onFinish={handleOnFinish}>
             <InputDate
               textInputDate="Contract Date"
-              typeInputDate="datePicker"
+              typeInputDate="datePicker" 
               nameInputDate="contractDate"
+            
+              
             />
             <InputComponent
               textInput="Contract Name"
@@ -95,12 +107,13 @@ const Contract = () => {
             />
             <div className=" flex gap-4">
               <UpLoadFile
-                isMultiple={false}
+               
+                isMultiple={true}
                 onImageUpload={handleImageUpload}
-                isShowUploadList={false}
+                isShowUploadList={true}
               />
               <ButtonComponent
-                htmlType="submit"
+                htmlType="submit" 
                 textBtn="Add"
                 style={{ color: "#Fff", background: "#ccc" }}
               />

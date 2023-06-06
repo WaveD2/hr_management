@@ -59,7 +59,12 @@ const Others = () => {
   }, []);
 
   const handleImageUpload = async (binaryData) => {
+    console.log("dateString" ,binaryData);
+    
     const dateString = binaryData.lastModifiedDate;
+    
+    console.log("dateString ewqew" ,dateString);
+
     const formattedDate = await convertDate({ dateString });
     setTimeDate(formattedDate);
     setBinaryFile(binaryData);
@@ -75,7 +80,7 @@ const Others = () => {
         document: binaryFile,
       })
     );
-  }, [timeDate, binaryFile]);
+  }, [binaryFile && timeDate]);
 
   return (
     <section className="fontFamily">
@@ -83,11 +88,14 @@ const Others = () => {
         textSelect="Grade"
         valueSelect={grade}
         defaultValue="Choose Grade"
+        keySelect="grade"
       />
       <InputSelect
         textSelect="Benefit"
         valueSelect={benefit}
         defaultValue="Choose Benefit"
+        keySelect="benefit"
+
       />
 
       <Form.Item
@@ -105,7 +113,7 @@ const Others = () => {
         />
       </Form.Item>
 
-      <InputComponent textInput="HRM User Account" name="" />
+      <InputComponent textInput="HRM User Account" name="" keyInput="remark"/>
 
       <div className="mt-4">
         <UpLoadFile

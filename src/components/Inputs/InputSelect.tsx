@@ -1,5 +1,7 @@
 import React from "react";
 import { Form, Select } from "antd";
+import {useDispatch} from "react-redux";
+import { employeeAction } from "../../redux/ReducerEmployee/reducerEmployee";
 
 interface ISelect {
   defaultValue?: string;
@@ -16,14 +18,26 @@ interface ISelect {
   onBlur?: string;
   name?: string;
   indexSelect?: number | any;
+  keySelect ?: string ;
 }
 
 const InputSelect = (props: ISelect) => {
+  const dispatch = useDispatch();
+
   const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
+  
+    const keyUser : string | any = props.keySelect;
+    console.log("value" ,value);
+    
+    // const detailSelect = props.valueSelect[Number(value)];
+    const newKeyUser= {};
+    newKeyUser[keyUser] = Number(value) ;
+  
+    dispatch(employeeAction.addInfoDetailUser(newKeyUser));
+
   };
 
-  return (
+  return (  
     <Form.Item
       initialValue={props.defaultValue}
       name={props.name}
@@ -35,6 +49,8 @@ const InputSelect = (props: ISelect) => {
         },
       ]}>
       <Select
+           
+           
         onChange={handleChange}
         style={{
           height: "46px",

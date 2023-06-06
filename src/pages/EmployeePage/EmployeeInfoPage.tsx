@@ -9,6 +9,9 @@ import ButtonComponent from "../../components/Button/Button";
 import TitleComponents from "../../components/TitleComponents";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import callAPI from "../../services/fetchApi";
+import { API_PATHS } from "../../services/api";
+import { AxiosResponse } from "axios";
 
 const ListTab = [
   { id: 1, title: "Employee Information", component: <Information /> },
@@ -26,9 +29,32 @@ const EmployeeInfoPage = () => {
     console.log(key);
   };
 
+
+  React.useEffect(() => {
+    
+  }, []);
+
+
   const handleSaveEmployee = () => {
     //https://api.hrm.div4.pgtest.co/api/v1/employee
-    console.log("select", select);
+    console.log(" API_PATHS.detailEmployee" , API_PATHS.detailEmployee);
+    
+    callAPI({
+      baseUrl: API_PATHS.detailEmployee,
+      isUrlParams: true,
+      method: "POST",
+      data : select.employeeInfoDetailUser
+    })
+      .then((response: AxiosResponse) => {
+       console.log("thanfh cong");
+       
+      })
+      .catch((error: any) => {
+       console.log("that bai");
+       
+       
+      });
+   
   };
 
   return (

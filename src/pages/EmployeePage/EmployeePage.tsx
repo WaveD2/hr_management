@@ -12,6 +12,8 @@ import Search from "../../components/Button/Search";
 import { useTranslation } from "react-i18next";
 import { convertColumTable } from "../../utils/convertColumTable";
 
+
+
 interface ICol {
   title: string;
   dataIndex: string;
@@ -19,6 +21,7 @@ interface ICol {
 }
 
 const EmployeePage: React.FC = () => {
+ 
   const { t } = useTranslation();
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [loadings, setLoadings] = useState(false);
@@ -123,11 +126,21 @@ const EmployeePage: React.FC = () => {
   };
 
   const handleAdd = () => {
+    dispatch(employeeAction.addInfoDetailUser({}));
     navigate("/employee/create-or-update");
   };
   const handleDelete = () => {
     setIsModalOpen(true);
   };
+
+  
+    const handleDispatchUser = (id: number) => {
+      const dataUserDetail = selector?.data.find(item => item.id === id);
+  
+      dispatch(employeeAction.addInfoDetailUser(dataUserDetail));
+    }
+   
+
 
   return (
     <section>
@@ -177,10 +190,11 @@ const EmployeePage: React.FC = () => {
         }}
         onRow={(record, rowIndex) => {
           return {
-            onDoubleClick: (event) => {
+            onDoubleClick: async (event) => {
               event.preventDefault();
               record.id = Number(record.id);
               dispatch(employeeAction.detailValueTable(record));
+              await handleDispatchUser(record.id);
               navigate(`/employee/create-or-update/${record.id}`);
             },
           };

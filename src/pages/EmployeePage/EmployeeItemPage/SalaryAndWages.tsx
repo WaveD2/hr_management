@@ -46,17 +46,19 @@ const SalaryAndWages = () => {
 
   return (
     <section className="grid grid-cols-1 gap-2 ">
-      <InputNumberComponent text="Basic Salary" value={basic_salary} />
-      <InputNumberComponent text="Basic Salary (Audit)" value={audit_salary} />
+      <InputNumberComponent text="Basic Salary" value={basic_salary} keyInput="basic_salary" />
+      <InputNumberComponent text="Basic Salary (Audit)" value={audit_salary} keyInput="audit_salary" />
       <InputNumberComponent
         text="Safety Insurance Amount"
         value={safety_insurance}
+        keyInput="safety_insurance"
       />
       <InputNumberComponent
         text="Healthy Insurance Amount"
         value={health_insurance}
+        keyInput="health_insurance"
       />
-      <InputNumberComponent text="Meal Allowance" value={meal_allowance} />
+      <InputNumberComponent text="Meal Allowance" value={meal_allowance} keyInput="meal_allowance"/>
     </section>
   );
 };
